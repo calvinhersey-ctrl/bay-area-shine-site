@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&family=Caveat:wght@600&display=swap">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=2026-10-14">
 <script>document.documentElement.classList.replace('no-js','js')</script>
 </head>
 <body>
@@ -133,10 +133,10 @@
 
 <section class="sect white crew-sect">
   <div class="wrap crew">
-    <img src="img/crew.jpg" srcset="img/crew-1200.jpg 1200w, img/crew.jpg 2400w" sizes="(max-width:820px) 100vw, 620px" width="1024" height="688" loading="lazy" alt="Cleaner in a royal blue shirt, cap, mask and gloves wiping a kitchen counter">
+    <img src="img/crew.jpg" srcset="img/crew-1200.jpg 1200w, img/crew.jpg 2400w" sizes="(max-width:820px) 100vw, 620px" width="1024" height="688" loading="lazy" alt="Cleaner wiping a kitchen counter">
     <div>
       <span class="eyebrow">Every visit</span>
-      <h2>Gloves, mask, logo shirt. Every time.</h2>
+      <h2>We bring everything. Every time.</h2>
       <ul class="ticks">
         <li><span class="t">We bring every supply. You don't buy a thing.</span></li>
         <li><span class="t">The same checklist in every home, so nothing gets skipped.</span></li>
@@ -182,6 +182,7 @@
       <details><summary><span class="t">How do I pay?</span></summary><p>The <span data-cfg="deposit">$40</span> deposit is paid online by card when you book. The rest is due once the clean is done, and we send the payment details with your confirmation.</p></details>
       <details><summary><span class="t">What isn't included?</span></summary><p>We don't move heavy furniture, wash outside windows, or clean mold, biohazards or pest messes. Ask if you're not sure.</p></details>
     </div>
+    <div class="ask-row"><span class="t">Still have a question?</span><a class="btn btn-ghost" href="mailto:bayareashinecleaners@gmail.com?subject=Question" data-ask>Ask us</a></div>
   </div>
 </section>
 
@@ -209,13 +210,13 @@
   <div class="close">
     <svg class="big" aria-hidden="true"><use href="#sp"/></svg>
     <div class="close-copy"><h2>Ready for a home that shines?</h2><p>Grab a window online, or email us for a free quote.</p></div>
-    <div class="acts"><a class="btn btn-ink" href="#build" data-book>See open times <span aria-hidden="true">→</span></a><a class="btn btn-ghost mail-btn" href="mailto:bayareashinecleaners@gmail.com" data-mail>bayareashinecleaners@gmail.com</a></div>
+    <div class="acts"><a class="btn btn-ink" href="#build" data-book>See open times <span aria-hidden="true">→</span></a><a class="btn btn-ghost" href="mailto:bayareashinecleaners@gmail.com?subject=Question" data-ask>Ask a question</a><a class="btn btn-ghost mail-btn" href="mailto:bayareashinecleaners@gmail.com" data-mail>bayareashinecleaners@gmail.com</a></div>
   </div>
 </div>
 </main>
 
 <div class="wrap">
-  <footer><b>Bay Area Shine Cleaners</b> · Open every day, 8 AM to 6 PM · <a class="mail" href="mailto:bayareashinecleaners@gmail.com" data-mail>bayareashinecleaners@gmail.com</a></footer>
+  <footer><b>Bay Area Shine Cleaners</b> · Open every day, 8 AM to 6 PM · <a class="mail" href="mailto:bayareashinecleaners@gmail.com" data-mail>bayareashinecleaners@gmail.com</a> · <a class="mail" href="mailto:bayareashinecleaners@gmail.com?subject=Question" data-ask>Ask a question</a></footer>
 </div>
 
 <dialog class="qd" id="quote" aria-labelledby="qTitle">
@@ -236,17 +237,18 @@
           <option value="organizing">Organizing</option>
           <option value="office">Office cleaning</option>
           <option value="other">Something else</option>
+          <option value="question">Just a question</option>
         </select>
       </div>
       <div class="field full" id="qWinField" hidden><label for="qWin">Preferred window</label><select id="qWin"></select></div>
       <div class="field"><label for="qName">Name</label><input id="qName" type="text" autocomplete="name" required></div>
-      <div class="field"><label for="qCity">City</label><input id="qCity" type="text" autocomplete="address-level2" list="cityList" required><datalist id="cityList"></datalist></div>
+      <div class="field"><label for="qCity" id="qCityLbl">City</label><input id="qCity" type="text" autocomplete="address-level2" list="cityList" required><datalist id="cityList"></datalist></div>
       <div class="field"><label for="qEmail">Email</label><input id="qEmail" type="email" autocomplete="email" inputmode="email"></div>
       <div class="field"><label for="qPhone">Mobile, for texts</label><input id="qPhone" type="tel" autocomplete="tel" inputmode="tel"></div>
       <div class="field" data-home><label for="qBeds">Bedrooms</label><select id="qBeds"><option>Studio</option><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5+</option></select></div>
       <div class="field" data-home><label for="qBaths">Bathrooms</label><select id="qBaths"><option>1</option><option selected>2</option><option>3</option><option>4+</option></select></div>
-      <div class="field full"><label for="qDate">Preferred date</label><input id="qDate" type="text" placeholder="For example: this Saturday, or any weekday"></div>
-      <div class="field full"><label for="qNotes">Anything else we should know</label><textarea id="qNotes" rows="3" placeholder="Pets, parking, how to get in"></textarea></div>
+      <div class="field full" id="qDateField"><label for="qDate">Preferred date</label><input id="qDate" type="text" placeholder="For example: this Saturday, or any weekday"></div>
+      <div class="field full"><label for="qNotes" id="qNotesLbl">Anything else we should know</label><textarea id="qNotes" rows="3" placeholder="Pets, parking, how to get in"></textarea></div>
     </div>
     <div class="qd-est" id="qEst" aria-live="polite"><b id="qEstPrice"></b><span id="qEstNote"></span></div>
     <div class="qd-acts">
@@ -257,7 +259,8 @@
   </form>
 </dialog>
 
-<script src="js/config.js"></script>
-<script src="js/main.js"></script>
+<script src="js/config.js?v=2026-10-14"></script>
+<!-- bump ?v= on every release so a cached old file never pairs with a new page -->
+<script src="js/main.js?v=2026-10-14"></script>
 </body>
 </html>

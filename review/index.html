@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bay Area Shine Cleaners · Reviews</title>
+<meta name="description" content="Thanks for choosing Bay Area Shine Cleaners. This link takes you to our reviews.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1E3A8A">
+<!-- The thank-you card's QR code points here (/review), so where it lands can change without reprinting.
+     Where it goes: reviewLinkTarget in js/config.js (a full URL, or a path relative to this /review/ page).
+     Not set yet = the reviews section on the home page. -->
+<noscript><meta http-equiv="refresh" content="0; url=../#reviews"></noscript>
+<script src="../js/config.js?v=2026-10-14"></script>
+<script>
+  (function(){
+    var target = (window.BAS_CONFIG && window.BAS_CONFIG.reviewLinkTarget) || '../#reviews';
+    window.BAS_REVIEW_TARGET = target;
+    location.replace(target);
+  })();
+</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23F6C445' d='M12 1.5c.9 5.6 3 7.7 8.6 8.6v3.8c-5.6.9-7.7 3-8.6 8.6-.9-5.6-3-7.7-8.6-8.6v-3.8c5.6-.9 7.7-3 8.6-8.6z'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Figtree:wght@400;700&display=swap">
+<style>
+  :root{--fog:#F2F4F3;--paper:#fff;--ink:#1E3A8A;--sun:#F6C445;--muted:#33505B;--line:#D9E1E0}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:24px 16px;background:var(--fog);color:var(--muted);font:17px/1.5 'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;text-align:center}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:28px;padding:32px 24px;max-width:420px;width:100%;display:grid;gap:14px;justify-items:center;box-shadow:0 30px 60px -36px rgba(30,58,138,.45)}
+  .logo{display:flex;align-items:center;gap:8px;font-family:'Bricolage Grotesque','Arial Black',system-ui,sans-serif;font-weight:800;font-size:20px;color:var(--ink)}
+  .logo svg{width:26px;height:26px;color:var(--sun)}
+  h1{margin:0;font-family:'Bricolage Grotesque','Arial Black',system-ui,sans-serif;font-weight:800;font-size:30px;line-height:1.1;letter-spacing:-.015em;color:var(--ink)}
+  p{margin:0}
+  .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 24px;border-radius:999px;background:var(--ink);color:#fff;font-weight:700;text-decoration:none}
+  :focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+</style>
+</head>
+<body>
+  <main class="card">
+    <span class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 1.5c.9 5.6 3 7.7 8.6 8.6v3.8c-5.6.9-7.7 3-8.6 8.6-.9-5.6-3-7.7-8.6-8.6v-3.8c5.6-.9 7.7-3 8.6-8.6z"/></svg>Bay Area Shine</span>
+    <h1>Thanks for having us!</h1>
+    <p>Taking you to our reviews now.</p>
+    <a class="btn" id="go" href="../#reviews">Continue</a>
+  </main>
+  <script>document.getElementById('go').href = window.BAS_REVIEW_TARGET || '../#reviews';</script>
+</body>
+</html>

@@ -4,6 +4,15 @@
    know (bookingUrl) are left out, and the page falls back to the request form. */
 (function(){
   'use strict';
+  /* Arriving on a link like /#reviews (the QR card): make sure we end up there even if photos moved the page
+     while loading, unless the visitor already started scrolling. Smooth scrolling only switches on after this. */
+  let moved = false;
+  ['wheel', 'touchstart', 'keydown'].forEach(ev => addEventListener(ev, () => { moved = true; }, {once: true, passive: true}));
+  addEventListener('load', () => {
+    const id = decodeURIComponent(location.hash.slice(1)), t = id && document.getElementById(id);
+    if (t && !moved && Math.abs(t.getBoundingClientRect().top) > 2) t.scrollIntoView();
+    document.documentElement.classList.add('loaded');
+  });
 
   const FALLBACK_CONFIG = {
     email: 'bayareashinecleaners@gmail.com',
@@ -366,6 +375,7 @@
     else a.addEventListener('click', e => { e.preventDefault(); openForm('book', {service: st.svc, opener: a}); });
   });
   $$('[data-quote]').forEach(b => b.addEventListener('click', () => openForm('quote', {service: b.dataset.quote, opener: b})));
+  $$('[data-ask]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); openForm('quote', {service: 'question', opener: a}); }));
 
   /* ---------- quote / request form (FormSubmit, with an email-app fallback) ---------- */
   const dlg = $('#quote'), form = $('#quoteForm'), f = id => document.getElementById(id);
@@ -373,7 +383,10 @@
   const OTHER = {airbnb:'Airbnb turnover', organizing:'Organizing', office:'Office cleaning', other:'Something else'};
   const NOTES_HINT = {airbnb:'Checkout and check-in times, how often, laundry', organizing:'Which space, and how full it is', office:'Size, how often, best times', other:'Tell us what you need'};
   const svcName = id => SVC_NAME[id] || OTHER[id] || id;
-  const NOTE_DEFAULT = 'Send request goes straight to our inbox.';
+  /* "Just a question" turns the same form into a plain question: no sizes, dates or estimate */
+  const isQ = () => f('qService').value === 'question';
+  const sendLabel = () => isQ() ? 'Send question' : 'Send request';
+  const noteDefault = () => isQ() ? 'Your question goes straight to our inbox.' : 'Send request goes straight to our inbox.';
   /* Bedrooms in the form set the home size it prices (Studio and 1 → first size, 4 and 5+ → last) */
   const BEDS_TO_SIZE = [0, 0, 1, 2, 3, 3];
   const formSize = () => Math.min(BEDS_TO_SIZE[f('qBeds').selectedIndex] ?? st.size, Math.max(sizeLabels.length - 1, 0));
@@ -382,16 +395,11 @@
 
   function openForm(m, o){
     mode = m; opener = o.opener || null;
-    f('qTitle').textContent = m === 'book' ? 'Request a cleaning' : 'Get a free quote';
-    f('qLede').textContent = m === 'book'
-      ? 'Send this and we text or email to confirm your window and price.'
-      : 'Tell us about the job. We reply by email or text with your price.';
-    f('qWinField').hidden = m !== 'book';
     f('qWin').value = st.win;
     f('qService').value = o.service || st.svc;
     if (o.city != null) f('qCity').value = o.city;
     if (SVC_IDS.includes(f('qService').value)) f('qBeds').selectedIndex = Math.min(st.size + 1, f('qBeds').options.length - 1);
-    note.className = 'form-note'; note.textContent = NOTE_DEFAULT; delete note.dataset.state;
+    note.className = 'form-note'; note.textContent = ''; delete note.dataset.state;
     renderForm();
     if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', '');
   }
@@ -415,9 +423,18 @@
     return {price: 'Priced per job', note: 'Send the request and we reply with your price.'};
   }
   function renderForm(){
-    const id = f('qService').value, home = SVC_IDS.includes(id) || id === 'airbnb';
+    const id = f('qService').value, q = id === 'question', home = SVC_IDS.includes(id) || id === 'airbnb';
+    f('qTitle').textContent = q ? 'Ask us a question' : mode === 'book' ? 'Request a cleaning' : 'Get a free quote';
+    f('qLede').textContent = q ? 'Ask us anything. We reply by email or text.'
+      : mode === 'book' ? 'Send this and we text or email to confirm your window and price.'
+      : 'Tell us about the job. We reply by email or text with your price.';
+    f('qWinField').hidden = mode !== 'book' || q;
     $$('[data-home]', form).forEach(el => { el.hidden = !home; });
-    f('qNotes').placeholder = NOTES_HINT[id] || 'Pets, parking, how to get in';
+    f('qDateField').hidden = q; f('qEst').hidden = q;
+    f('qNotesLbl').textContent = q ? 'Your question' : 'Anything else we should know';
+    f('qCityLbl').textContent = q ? 'City (optional)' : 'City';
+    f('qNotes').required = q; f('qNotes').rows = q ? 5 : 3;
+    f('qNotes').placeholder = q ? 'Ask about our services, your city, scheduling, anything.' : NOTES_HINT[id] || 'Pets, parking, how to get in';
     const e = formEstimate();
     f('qEstPrice').textContent = e.price; f('qEstNote').textContent = e.note;
     f('qMail').href = 'mailto:' + C.email + '?subject=' + encodeURIComponent(subject()) + '&body=' + encodeURIComponent(requestText());
@@ -428,12 +445,21 @@
   function syncSent(){
     if (sending) return;
     const done = sentSig !== null && sentSig === sig();
-    sendBtn.disabled = done; sendBtn.textContent = done ? 'Sent' : 'Send request';
-    if (done){ note.className = 'form-note sent'; note.dataset.state = 'ok'; note.textContent = 'Sent. We got your request and will reply to ' + sentWho + '.'; }
-    else if (note.dataset.state === 'ok'){ note.className = 'form-note'; note.textContent = NOTE_DEFAULT; delete note.dataset.state; }
+    sendBtn.disabled = done; sendBtn.textContent = done ? 'Sent' : sendLabel();
+    if (done){ note.className = 'form-note sent'; note.dataset.state = 'ok'; note.textContent = 'Sent. We got your ' + (isQ() ? 'question' : 'request') + ' and will reply to ' + sentWho + '.'; }
+    else if (note.dataset.state === 'ok' || note.className === 'form-note'){ note.className = 'form-note'; note.textContent = noteDefault(); delete note.dataset.state; }
   }
   function fields(){
-    const id = f('qService').value, home = SVC_IDS.includes(id) || id === 'airbnb', e = formEstimate();
+    const id = f('qService').value, home = SVC_IDS.includes(id) || id === 'airbnb';
+    if (id === 'question') return {
+      request: 'Question',
+      name: f('qName').value.trim(),
+      email: f('qEmail').value.trim(),
+      phone: f('qPhone').value.trim(),
+      city: f('qCity').value.trim(),
+      question: f('qNotes').value.trim()
+    };
+    const e = formEstimate();
     const out = {
       request: mode === 'book' ? 'Booking request' : 'Quote request',
       service: svcName(id),
@@ -450,7 +476,8 @@
     out.notes = f('qNotes').value.trim();
     return out;
   }
-  const subject = () => (mode === 'book' ? 'Booking request: ' : 'Quote request: ') + svcName(f('qService').value) + (f('qCity').value.trim() ? ' in ' + f('qCity').value.trim() : '');
+  const subject = () => isQ() ? 'Question from ' + (f('qName').value.trim() || 'the website')
+    : (mode === 'book' ? 'Booking request: ' : 'Quote request: ') + svcName(f('qService').value) + (f('qCity').value.trim() ? ' in ' + f('qCity').value.trim() : '');
   function requestText(){
     const o = fields();
     return Object.keys(o).filter(k => o[k]).map(k => k.replace(/_/g, ' ').replace(/^./, c => c.toUpperCase()) + ': ' + o[k]).join('\n');
@@ -458,9 +485,9 @@
   function ready(){
     const em = f('qEmail').value.trim(), ph = f('qPhone').value.replace(/\D/g, '');
     note.className = 'form-note err';
-    const miss = !f('qName').value.trim() ? 'qName' : !f('qCity').value.trim() ? 'qCity' : null;
-    if (miss){ note.textContent = 'Add your name and city first so we can quote the right job.'; f(miss).focus(); return false; }
-    if (!em && ph.length < 10){ note.textContent = 'Add an email or a mobile number so we can send your price.'; f('qEmail').focus(); return false; }
+    const q = isQ(), miss = !f('qName').value.trim() ? 'qName' : q ? (!f('qNotes').value.trim() ? 'qNotes' : null) : (!f('qCity').value.trim() ? 'qCity' : null);
+    if (miss){ note.textContent = q ? 'Add your name and your question first.' : 'Add your name and city first so we can quote the right job.'; f(miss).focus(); return false; }
+    if (!em && ph.length < 10){ note.textContent = 'Add an email or a mobile number so we can ' + (q ? 'reply.' : 'send your price.'); f('qEmail').focus(); return false; }
     if (em && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){ note.textContent = "That email doesn't look right. Check it and try again."; f('qEmail').focus(); return false; }
     note.className = 'form-note'; note.textContent = '';
     return true;
@@ -483,7 +510,7 @@
     const timer = setTimeout(() => ctrl && ctrl.abort(), 12000);
     const failed = () => {
       clearTimeout(timer); sending = false;
-      sendBtn.disabled = false; sendBtn.textContent = 'Send request';
+      sendBtn.disabled = false; sendBtn.textContent = sendLabel();
       note.className = 'form-note err';
       note.textContent = "That didn't go through. Tap Email it instead, or write to " + C.email + '.';
     };
