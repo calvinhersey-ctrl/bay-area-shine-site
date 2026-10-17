@@ -21,6 +21,10 @@ h3{font-size:20px;font-weight:700;letter-spacing:0}
 p,figure,ul,ol{margin:0}
 button{font:inherit;cursor:pointer}
 [hidden]{display:none!important}
+.js .enhancement-note{display:none}
+.enhancement-note{margin-bottom:16px}
+.no-js .shop,.no-js .incl,.no-js #build .stepnum,.no-js .check{display:none}
+.no-js .pick button,.no-js .win{cursor:default}
 /* focus ring: ink on light and yellow backgrounds, sun on the dark blue panels */
 :focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 .blue :focus-visible,.est :focus-visible,.qd-est :focus-visible,.skip:focus-visible{outline-color:var(--sun)}
@@ -35,17 +39,17 @@ button{font:inherit;cursor:pointer}
 .btn-ink{background:var(--ink);color:#fff;box-shadow:0 12px 24px -12px rgba(30,58,138,.7)}
 .btn-sun{background:var(--sun);color:var(--ink)}
 .btn-ghost{background:var(--paper);color:var(--ink);border:2px solid var(--ink)}
-.spark{width:1em;height:1em;color:var(--sun);flex:none}
 .skip{position:absolute;left:12px;top:-60px;z-index:30;background:var(--ink);color:#fff;padding:10px 16px;border-radius:12px;font-weight:700}
 .skip:focus{top:12px}
 
 /* header */
-.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:16px;padding-top:calc(16px + env(safe-area-inset-top,0px))}
-.logo{display:flex;align-items:center;gap:8px;min-height:44px;font-family:var(--display);font-weight:800;font-size:20px;color:var(--ink);text-decoration:none;white-space:nowrap}
-.logo .spark{width:26px;height:26px}
-.nav{display:flex;align-items:center;gap:24px}
-.nav a{display:inline-flex;align-items:center;min-height:44px;color:var(--ink);font-weight:600;text-decoration:none;font-size:15px}
-.nav .btn{min-height:44px;padding:10px 20px;font-size:15px;color:#fff;white-space:nowrap}
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding-block:16px;padding-top:calc(16px + env(safe-area-inset-top,0px))}
+.logo{display:flex;align-items:center;min-height:44px;flex:none}
+.logo img{display:block;height:30px;width:auto}
+@media (max-width:420px){.logo img{height:28px}}
+.nav{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:24px;max-width:100%;margin-left:auto}
+.nav a{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;color:var(--ink);font-weight:600;text-decoration:none;font-size:15px}
+.nav .btn{min-height:44px;padding:10px 20px;font-size:15px;color:#fff;white-space:normal}
 @media (max-width:820px){.nav a:not(.btn){display:none}}
 @media (max-width:380px){.lg-only{display:none}}
 
@@ -95,8 +99,8 @@ button{font:inherit;cursor:pointer}
 .wipe.go .blade{left:104%;opacity:1}
 .wipe.done .blade{opacity:0}
 .no-js .wipe .haze,.no-js .wipe .reset{display:none}
-.reveal{position:absolute;left:0;right:0;top:0;padding:28px;display:flex;flex-direction:column;gap:12px;align-items:flex-start;opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease;pointer-events:none}
-.reveal.on,.no-js .reveal{opacity:1;transform:none;pointer-events:auto}
+.reveal{position:absolute;left:0;right:0;top:0;padding:28px;display:flex;flex-direction:column;gap:12px;align-items:flex-start;visibility:hidden;opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease;pointer-events:none}
+.reveal.on,.no-js .reveal{visibility:visible;opacity:1;transform:none;pointer-events:auto}
 .reveal h2{color:var(--ink);background:rgba(255,255,255,.88);padding:8px 14px;border-radius:14px;font-size:clamp(26px,3.6vw,40px);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
 @media (max-width:520px){.reveal{padding:18px}}
 .reset{position:absolute;right:16px;bottom:16px;background:rgba(255,255,255,.9);color:var(--ink);border:0;border-radius:999px;padding:10px 16px;font-weight:700;font-size:14px;min-height:44px}
@@ -130,11 +134,20 @@ button{font:inherit;cursor:pointer}
 .tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
 .tab{border:0;background:var(--chip);color:var(--ink);font-weight:700;font-size:14px;padding:10px 16px;border-radius:999px;min-height:44px}
 .tab[aria-selected="true"]{background:var(--ink);color:#fff}
+.room-status{font-size:14px;min-height:1.5em;margin:-4px 0 10px;color:var(--teal)}
 .room{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:3/2;max-width:100%;background:#ddd}
 .room img{width:100%;height:100%;object-fit:cover;transition:opacity .35s}
+.room.photo-loading img{position:absolute;inset:0;opacity:0;transition:none;pointer-events:none}
+.room:is(.photo-loading,.photo-failed,.photo-list){aspect-ratio:auto;display:grid;gap:8px;padding:16px;background:var(--fog);border:1px solid var(--line)}
+/* Reserve the photo's space while loading; longer lists scroll instead of moving the estimate. */
+.room:is(.photo-loading,.photo-list){aspect-ratio:3/2;overflow:auto;align-content:start}
+.room:is(.photo-failed,.photo-list) img{display:none}
+.room:is(.photo-loading,.photo-failed,.photo-list) .hs{position:static;transform:none;flex-direction:row;width:100%;min-height:44px;text-align:left;background:var(--paper);border-radius:12px}
+.room:is(.photo-loading,.photo-failed,.photo-list) .hs .lab{display:block;padding:0;background:none;box-shadow:none;white-space:normal;font-size:14px}
+.room:is(.photo-loading,.photo-failed,.photo-list) .dot{animation:none}
 /* the dot sits exactly on its spot (6px padding + 16px radius = 22px); the label runs right, or left when flipped */
 .hs{position:absolute;transform:translate(-22px,-50%);display:flex;align-items:center;gap:8px;border:0;background:none;padding:6px}
-.hs .dot{width:32px;height:32px;border-radius:50%;background:var(--sun);border:3px solid #fff;display:grid;place-items:center;color:var(--ink);font-weight:800;font-size:18px;line-height:1;box-shadow:0 0 0 0 rgba(246,196,69,.6);animation:pulse 2.4s infinite;flex:none}
+.hs .dot{width:32px;height:32px;border-radius:50%;background:var(--sun);border:3px solid #fff;display:grid;place-items:center;color:var(--ink);font-weight:800;font-size:18px;line-height:1;box-shadow:0 0 0 0 rgba(246,196,69,.6);animation:pulse 2.4s 2;flex:none}
 .hs .lab{background:#fff;color:var(--ink);font-weight:700;font-size:13px;padding:7px 11px;border-radius:10px;box-shadow:0 6px 16px rgba(0,0,0,.18);white-space:nowrap}
 .hs[aria-pressed="true"] .dot{background:var(--ink);color:#fff;animation:none}
 .hs.flip{flex-direction:row-reverse;transform:translate(calc(-100% + 22px),-50%)}
@@ -142,7 +155,7 @@ button{font:inherit;cursor:pointer}
 .hs.inc .dot{background:var(--teal);color:#fff;animation:none}
 .hs.inc .lab{background:#E3F4F1;color:var(--teal)}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(246,196,69,.65)}70%{box-shadow:0 0 0 12px rgba(246,196,69,0)}100%{box-shadow:0 0 0 0 rgba(246,196,69,0)}}
-@media (max-width:620px){.hs .lab{display:none}.hs[aria-pressed="true"] .lab,.hs.inc .lab{display:block;font-size:12px}}
+@media (max-width:620px){.hs .lab{display:none}.hs[aria-pressed="true"] .lab,.hs.inc .lab{display:block;font-size:12px;padding-inline:6px}}
 .est{background:var(--ink);color:#fff;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:16px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px)}
 .seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
 .seg.four{grid-template-columns:repeat(2,1fr)}
@@ -155,12 +168,25 @@ button{font:inherit;cursor:pointer}
 .lines div{display:flex;justify-content:space-between;gap:12px}
 .lines .x{color:rgba(255,255,255,.75)}
 .lines .inc{color:var(--mint)}
+.lines .extra{align-items:center;gap:8px}
+.lines .extra > span:first-child{flex:1;min-width:0}
+.lines .extra > span:nth-child(2){white-space:nowrap}
+.remove-extra{min-width:44px;min-height:44px;flex:none;padding:6px 10px;border:1px solid rgba(255,255,255,.45);border-radius:10px;background:transparent;color:#fff;font-size:13px;font-weight:700}
 .total{display:flex;justify-content:space-between;align-items:end;border-top:1px solid rgba(255,255,255,.2);padding-top:14px}
 .total b{font-family:var(--display);font-size:44px;line-height:1;font-variant-numeric:tabular-nums}
+/* the total rolls to a new price on .roll, laid over #total; #total always holds the real price (screen readers, QA) */
+.tot{display:grid;justify-items:end}
+.tot > b{grid-area:1/1}
+.roll{visibility:hidden}
+.tot.rolling #total{color:transparent}
+.tot.rolling .roll{visibility:visible}
 .est-note{font-size:13px;color:rgba(255,255,255,.75)}
 .est-copy{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:10px 10px 10px 14px;font-size:14px}
 .est-copy b{color:#fff;font-weight:700;-webkit-user-select:all;user-select:all}
 .est-copy button{min-height:44px;padding:8px 16px;border-radius:999px;border:0;background:#fff;color:var(--ink);font-weight:700;font-size:14px}
+.est-copy button:disabled{cursor:progress;transform:none}
+.copy-status{grid-column:1/-1;font-size:13px}
+.copy-status:empty{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
 .empty{color:rgba(255,255,255,.6);font-size:14px}
 .others{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
 @media (max-width:820px){.others{grid-template-columns:1fr}}
@@ -248,11 +274,13 @@ button{font:inherit;cursor:pointer}
 @media (max-width:520px){.close .acts .btn{width:100%}.mail-btn{font-size:15px;padding-inline:16px}}
 footer{padding-block:28px 40px;font-size:15px}
 footer b{color:var(--ink)}
+.foot-logo{display:block;height:30px;width:auto;margin-bottom:14px}
+@media (max-width:420px){.foot-logo{height:28px}}
 .mail{display:inline-block;padding-block:12px;color:var(--teal);font-weight:600;overflow-wrap:anywhere}
 
 /* quote / request form (opens from Get a quote, the city checker, and Book while there's no booking page) */
 html:has(dialog[open]){overflow:hidden}
-.qd{border:0;padding:0;border-radius:24px;width:min(640px,calc(100% - 24px));max-height:calc(100% - 24px);background:var(--paper);color:var(--muted);box-shadow:0 30px 80px -20px rgba(22,48,111,.6)}
+.qd{border:0;padding:0;border-radius:24px;left:env(safe-area-inset-left,0px);right:env(safe-area-inset-right,0px);top:env(safe-area-inset-top,0px);bottom:env(safe-area-inset-bottom,0px);width:min(640px,calc(100% - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px) - 24px));max-height:calc(100% - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px) - 24px);background:var(--paper);color:var(--muted);box-shadow:0 30px 80px -20px rgba(22,48,111,.6)}
 .qd::backdrop{background:rgba(22,48,111,.55)}
 .qd form{padding:22px;display:grid;gap:14px}
 .qd-head{display:flex;justify-content:space-between;align-items:start;gap:12px}
@@ -263,21 +291,63 @@ html:has(dialog[open]){overflow:hidden}
 .field{display:grid;gap:6px;min-width:0}
 .field.full{grid-column:1/-1}
 .field label{font-size:14px;font-weight:800;color:var(--ink)}
+.contact-hint{grid-column:1/-1;font-size:14px}
 .field input,.field select,.field textarea{font:inherit;font-size:16px;width:100%;min-height:48px;padding:11px 14px;border-radius:12px;border:2px solid var(--line);background:var(--fog);color:var(--ink)}
 .field textarea{min-height:88px;resize:vertical}
 .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--ink);outline:none}
+.field [aria-invalid="true"]{border-color:#8A3A00}
 .hp{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0}
 .qd-est{background:var(--ink);color:#fff;border-radius:16px;padding:14px 18px;display:grid;gap:4px}
 .qd-est b{font-family:var(--display);font-size:26px;line-height:1.1}
 .qd-est span{font-size:14px;color:rgba(255,255,255,.8)}
 .qd-acts{display:flex;flex-wrap:wrap;gap:10px}
 @media (max-width:520px){.qd-acts .btn{width:100%}}
-.qd-acts .btn:disabled{opacity:.7;cursor:progress;transform:none}
-.form-note{font-size:14px;min-height:1.5em}
+.qd-acts .btn:disabled{opacity:.7;cursor:default;transform:none}
+.qd form[aria-busy="true"] .btn:disabled,.qd-acts [aria-disabled="true"]{opacity:.7;cursor:progress;transform:none}
+.form-note{font-size:14px;min-height:1.5em;overflow-wrap:anywhere}
 .form-note.err{color:#8A3A00;font-weight:700}
 .form-note.sent{color:var(--ink);font-weight:700;background:var(--fog);border:2px solid var(--teal);border-radius:12px;padding:12px 14px}
+
+/* motion: quiet feedback on what the visitor does (a tap, a pick, the price changing), nothing that plays by itself.
+   All of it is inside no-preference, so reduced motion gets none of it (the sweep has its own rules above). */
+@media (prefers-reduced-motion:no-preference){
+  .btn,.win,.pick button,.seg button,.tab,.hs,.est-copy button,.qd-x{-webkit-tap-highlight-color:transparent}
+  .win,.pick button,.seg button,.tab,.est-copy button,.qd-x{transition:background-color .18s ease,border-color .18s ease,color .18s ease,transform .12s ease}
+  .chips span{transition:background-color .2s ease}
+  .hs .dot{transition:transform .12s ease,background-color .18s ease}
+  .btn:active,.win:active,.pick button:active,.seg button:not(:disabled):active,.tab:active,.est-copy button:active,.qd-x:active{transform:scale(.97)}
+  .hs:active .dot{transform:scale(.88)}
+  .pick button[aria-pressed="true"]::after{animation:tick .25s ease-out}
+  .lines .new{animation:lineIn .3s ease-out}
+  .faq details[open] p,.incl[open] .ticks{animation:lineIn .3s ease-out}
+  .qd[open]{animation:dlgIn .22s ease-out}
+  .qd[open]::backdrop{animation:fadeIn .22s ease-out}
+}
+@keyframes tick{from{transform:scale(.4);opacity:0}to{transform:none;opacity:1}}
+@keyframes lineIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+@keyframes dlgIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
   .wipe .reset{display:none}
+}
+
+/* Preserve controls, selection and focus when the browser replaces brand colours. */
+@media (forced-colors:active){
+  .est,.blue,.qd-est{background:Canvas;color:CanvasText}
+  .est .lbl,.est .lines .inc,.est .lines .x,.est .est-note,.est-copy b,
+  .blue .eyebrow,.qd-est b,.qd-est span{color:CanvasText}
+  .lines .new{animation:none}
+  .btn,.tab,.qd-x,.est-copy button{border:1px solid ButtonText}
+  .seg button[aria-pressed],.win[aria-pressed],.tab[aria-selected]{color:ButtonText;background:ButtonFace}
+  .seg button small{opacity:1}
+  .seg button[aria-pressed="true"],.win[aria-pressed="true"],.tab[aria-selected="true"]{outline:3px solid Highlight;outline-offset:-5px}
+  .seg button:disabled{opacity:1;color:GrayText;border-color:GrayText}
+  :focus-visible,.blue :focus-visible,.est :focus-visible,.qd-est :focus-visible,.skip:focus-visible,
+  .seg button:focus-visible,.win:focus-visible,.tab:focus-visible{outline:3px dashed Highlight;outline-offset:3px}
+  .field input:focus,.field select:focus,.field textarea:focus,.check input:focus{outline:3px dashed Highlight;outline-offset:3px}
+  .field [aria-invalid="true"]{border-style:dashed}
+  .tot.rolling #total{color:CanvasText}
+  .tot .roll{display:none}
 }

@@ -12,16 +12,49 @@
 <meta property="og:title" content="Bay Area Shine Cleaners · Pick a time. We bring the shine.">
 <meta property="og:description" content="Home cleaning, Airbnb turnovers, organizing and offices across the Bay Area. Build your price, pick a 3-hour window online, and we text to confirm.">
 <meta property="og:url" content="https://www.bayareashinecleaners.com/">
-<meta property="og:image" content="https://www.bayareashinecleaners.com/img/sweep-clean-1200.jpg">
+<meta property="og:image" content="https://www.bayareashinecleaners.com/img/sweep-clean.jpg">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="576">
+<meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:alt" content="A bright, spotless kitchen with a royal blue towel on the oven">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23F6C445' d='M12 1.5c.9 5.6 3 7.7 8.6 8.6v3.8c-5.6.9-7.7 3-8.6 8.6-.9-5.6-3-7.7-8.6-8.6v-3.8c5.6-.9 7.7-3 8.6-8.6z'/%3E%3C/svg%3E">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="favicon.ico?v=2026-10-16-launch-polish" sizes="48x48">
+<link rel="icon" href="favicon.svg?v=2026-10-16-launch-polish" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=2026-10-16-launch-polish">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&family=Caveat:wght@600&display=swap">
-<link rel="stylesheet" href="css/style.css?v=2026-10-14">
-<script>document.documentElement.classList.replace('no-js','js')</script>
+<link rel="stylesheet" href="css/style.css?v=2026-10-16-launch-polish">
+<link rel="stylesheet" href="css/app.css?v=2026-10-16-launch-polish">
+<script src="js/config.js?v=2026-10-16-launch-polish"></script>
+<script src="js/app-banner.js?v=2026-10-16-launch-polish"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.bayareashinecleaners.com/#business",
+      "name": "Bay Area Shine Cleaners",
+      "url": "https://www.bayareashinecleaners.com/",
+      "email": "bayareashinecleaners@gmail.com",
+      "logo": "https://www.bayareashinecleaners.com/img/brand/bas-line-2c-light.svg"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.bayareashinecleaners.com/#website",
+      "name": "Bay Area Shine Cleaners",
+      "url": "https://www.bayareashinecleaners.com/",
+      "publisher": {"@id": "https://www.bayareashinecleaners.com/#business"}
+    },
+    {
+      "@type": "Service",
+      "serviceType": ["Home cleaning", "Airbnb turnovers", "Organizing", "Office cleaning"],
+      "areaServed": "San Francisco Bay Area",
+      "provider": {"@id": "https://www.bayareashinecleaners.com/#business"}
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -33,10 +66,10 @@
 
 <div class="wrap">
   <header class="top">
-    <a class="logo" href="#top"><svg class="spark" aria-hidden="true"><use href="#sp"/></svg>Bay Area Shine</a>
+    <a class="logo" href="#top"><img src="img/brand/bas-line-2c-light.svg" width="201" height="30" alt="Bay Area Shine"></a>
     <nav class="nav" aria-label="Main">
       <a href="#build">Prices</a><a href="#how">How it works</a><a href="#faq">FAQ</a><a href="#area">Service area</a>
-      <a class="btn btn-ink" href="#build" data-book><span>Book<span class="lg-only"> a cleaning</span></span></a>
+      <a class="btn btn-ink" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2Wwjx2FFDg3RgHEk2cQYq_syutLqoAJwA_ZfKUwuwO08z3pgCuJb4vVCWDGLgxNbFf8F5uq_d3" target="_blank" rel="noopener" data-book><span>Book<span class="lg-only"> a cleaning</span></span></a>
     </nav>
   </header>
 </div>
@@ -51,7 +84,7 @@
         <p>Home cleaning, Airbnb turnovers, organizing and offices across the Bay Area. Book online and we text to confirm.</p>
       </div>
       <figure class="note">
-        <img src="img/thanks-card.jpg" width="635" height="635" alt="A Bay Area Shine thank-you card on a clean kitchen counter next to fresh daisies">
+        <img src="img/thanks-card.jpg" width="635" height="635" decoding="async" alt="A Bay Area Shine thank-you card on a clean kitchen counter next to fresh daisies">
         <figcaption>
           <p>Family-owned since 2019. We treat every home like our own and leave it shining.</p>
           <span class="sig">The Bay Area Shine team</span>
@@ -61,13 +94,13 @@
     <div class="book">
       <h2 class="book-h">Choose a 3-hour window</h2>
       <div class="windows" id="windows" role="group" aria-label="Time window">
-        <button class="win" type="button" aria-pressed="false" data-win="morning"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18h16M7 14a5 5 0 0 1 10 0M12 4v4M9 6l3-3 3 3"/></svg></span><span><small>MORNING</small><b>8–11 AM</b></span></button>
-        <button class="win" type="button" aria-pressed="true" data-win="midday"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/></svg></span><span><small>MIDDAY</small><b>11 AM–2 PM</b></span></button>
-        <button class="win" type="button" aria-pressed="false" data-win="afternoon"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18h16M7 14a5 5 0 0 1 10 0M12 3v5M9 6l3 3 3-3"/></svg></span><span><small>AFTERNOON</small><b>2–5 PM</b></span></button>
+        <button class="win" type="button" disabled aria-pressed="false" data-win="morning"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18h16M7 14a5 5 0 0 1 10 0M12 4v4M9 6l3-3 3 3"/></svg></span><span><small>MORNING</small><b>8–11 AM</b></span></button>
+        <button class="win" type="button" disabled aria-pressed="true" data-win="midday"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/></svg></span><span><small>MIDDAY</small><b>11 AM–2 PM</b></span></button>
+        <button class="win" type="button" disabled aria-pressed="false" data-win="afternoon"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18h16M7 14a5 5 0 0 1 10 0M12 3v5M9 6l3 3 3-3"/></svg></span><span><small>AFTERNOON</small><b>2–5 PM</b></span></button>
       </div>
       <div class="book-foot">
         <div class="dep"><span class="coin" aria-hidden="true">$</span><span><b><span data-cfg="deposit">$40</span> holds your spot</b> · comes off your total</span></div>
-        <a class="btn btn-ink" href="#build" data-book>See open times <span aria-hidden="true">→</span></a>
+        <a class="btn btn-ink" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2Wwjx2FFDg3RgHEk2cQYq_syutLqoAJwA_ZfKUwuwO08z3pgCuJb4vVCWDGLgxNbFf8F5uq_d3" target="_blank" rel="noopener" data-book>See open times <span aria-hidden="true">→</span></a>
       </div>
       <p class="book-hint" data-hint="hero" hidden></p>
     </div>
@@ -77,15 +110,15 @@
   <section class="wipe-sect" aria-label="Sweep to shine">
     <div class="wipe" id="wipe">
       <picture>
-        <source media="(max-width:820px)" srcset="img/sweep-clean-tall-1200.jpg 1200w, img/sweep-clean-tall.jpg 1920w" sizes="100vw">
-        <img src="img/sweep-clean.jpg" srcset="img/sweep-clean-1200.jpg 1200w, img/sweep-clean.jpg 2400w" sizes="(max-width:1200px) 100vw, 1160px" width="1024" height="576" alt="A bright, spotless kitchen with a royal blue towel on the oven">
+        <source media="(max-width:820px)" srcset="img/sweep-clean-tall.jpg" width="550" height="688">
+        <img src="img/sweep-clean.jpg" width="1024" height="576" loading="lazy" decoding="async" alt="A bright, spotless kitchen with a royal blue towel on the oven">
       </picture>
       <picture>
-        <source media="(max-width:820px)" srcset="img/sweep-haze-tall-1200.jpg 1200w, img/sweep-haze-tall.jpg 1920w" sizes="100vw">
-        <img class="haze" aria-hidden="true" src="img/sweep-haze.jpg" srcset="img/sweep-haze-1200.jpg 1200w, img/sweep-haze.jpg 2400w" sizes="(max-width:1200px) 100vw, 1160px" width="1024" height="576" alt="">
+        <source media="(max-width:820px)" srcset="img/sweep-haze-tall.jpg" width="550" height="688">
+        <img class="haze" aria-hidden="true" src="img/sweep-haze.jpg" width="1024" height="576" loading="lazy" decoding="async" alt="">
       </picture>
       <div class="blade" aria-hidden="true"></div>
-      <div class="reveal" id="reveal"><h2>This is what Saturday looks like.</h2><a class="btn btn-ink" href="#build" data-book>Book this clean <span aria-hidden="true">→</span></a></div>
+      <div class="reveal" id="reveal"><h2>This is what Saturday looks like.</h2><a class="btn btn-ink" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2Wwjx2FFDg3RgHEk2cQYq_syutLqoAJwA_ZfKUwuwO08z3pgCuJb4vVCWDGLgxNbFf8F5uq_d3" target="_blank" rel="noopener" data-book>Book this clean <span aria-hidden="true">→</span></a></div>
       <button class="reset" type="button" id="again"><span aria-hidden="true">↻</span> Replay</button>
     </div>
   </section>
@@ -95,11 +128,12 @@
   <div class="wrap">
     <div class="sect-head"><div><span class="eyebrow">Build your clean</span><h2>Pick a clean. Tap the extras. See your price.</h2></div><p>One price, built by you. We text your exact price, broken down room by room.</p></div>
 
+    <p class="enhancement-note">Starting prices are below. For a quote with your home size and extras, <a class="mail" href="mailto:bayareashinecleaners@gmail.com?subject=Cleaning%20quote">email us</a>, or book an open time online.</p>
     <h3 class="stepnum"><span>1</span>Pick your clean</h3>
     <div class="pick" id="svcSeg" role="group" aria-label="Type of clean">
-      <button type="button" data-svc="standard" aria-pressed="true"><b>Standard clean</b><span>Kitchen, bathrooms, bedrooms and floors, done right every visit.</span><span class="pr"><small>from </small><span data-cfg="from.standard">$140</span></span><span class="inc-line" data-inc="standard">Add any extra you need</span></button>
-      <button type="button" data-svc="deep" aria-pressed="false"><b>Deep clean</b><span>Everything in Standard, plus baseboards and buildup.</span><span class="pr"><small>from </small><span data-cfg="from.deep">$230</span></span><span class="inc-line" data-inc="deep">Includes baseboards and windows</span></button>
-      <button type="button" data-svc="move" aria-pressed="false"><b>Move-in or move-out</b><span>Empty home, inside cabinets and appliances, ready for keys.</span><span class="pr"><small>from </small><span data-cfg="from.move">$280</span></span><span class="inc-line" data-inc="move">Includes inside oven, inside fridge, inside cabinets, baseboards and windows</span></button>
+      <button type="button" disabled data-svc="standard" aria-pressed="true"><b>Standard clean</b><span>Kitchen, bathrooms, bedrooms and floors, done right every visit.</span><span class="pr"><small>from </small><span data-cfg="from.standard">$140</span></span><span class="inc-line" data-inc="standard">Add any extra you need</span></button>
+      <button type="button" disabled data-svc="deep" aria-pressed="false"><b>Deep clean</b><span>Everything in Standard, plus baseboards and buildup.</span><span class="pr"><small>from </small><span data-cfg="from.deep">$230</span></span><span class="inc-line" data-inc="deep">Includes baseboards and windows</span></button>
+      <button type="button" disabled data-svc="move" aria-pressed="false"><b>Move-in or move-out</b><span>Empty home, inside cabinets and appliances, ready for keys.</span><span class="pr"><small>from </small><span data-cfg="from.move">$280</span></span><span class="inc-line" data-inc="move">Includes inside oven, inside fridge, inside cabinets, baseboards and windows</span></button>
     </div>
     <details class="incl" id="incl">
       <summary><span>See everything in a <span id="inclName">Standard clean</span></span></summary>
@@ -110,30 +144,31 @@
       <div class="shop-main">
         <h3 class="stepnum"><span>2</span>Tap the yellow dots to add extras</h3>
         <div class="tabs" role="tablist" aria-label="Rooms" id="tabs"></div>
-        <div class="room" id="room" role="tabpanel" aria-label="Room photo with extras"><img id="roomImg" src="img/room-kitchen.jpg" srcset="img/room-kitchen-1200.jpg 1200w, img/room-kitchen.jpg 2400w" sizes="(max-width:900px) 100vw, 700px" width="1024" height="688" alt="Kitchen with oven, fridge, cabinets and a window"></div>
+        <p class="room-status" id="roomStatus" role="status">Optional extras · teal dots are included.</p>
+        <div class="room" id="room" role="tabpanel" tabindex="0" aria-label="Room photo with extras"><img id="roomImg" src="img/room-kitchen.jpg" width="1024" height="688" loading="lazy" decoding="async" alt="Kitchen with oven, fridge, cabinets and a window"></div>
       </div>
       <aside class="est" aria-label="Your estimate">
         <div id="sizeBox"><div class="lbl" id="sizeLbl">3 · Home size</div><div class="seg four" id="sizeSeg" role="group" aria-labelledby="sizeLbl"></div></div>
         <div><div class="lbl" id="freqLbl">4 · How often</div><div class="seg four" id="freqSeg" role="group" aria-labelledby="freqLbl"></div></div>
         <div><div class="lbl">Your estimate</div><div class="lines" id="lines"></div></div>
-        <div class="total" aria-live="polite"><span>Starting at</span><b id="total">$140</b></div>
-        <a class="btn btn-sun" href="#build" data-book>Book this clean <span aria-hidden="true">→</span></a>
-        <div class="est-copy" id="estCopy" hidden><p>In the booking notes, add: <b id="bookNote"></b></p><button type="button" id="copyNote">Copy</button></div>
+        <div class="total" aria-live="polite"><span>Starting at</span><span class="tot" id="tot"><b id="total" tabindex="-1">$140</b><b class="roll" aria-hidden="true"></b></span></div>
+        <a class="btn btn-sun" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2Wwjx2FFDg3RgHEk2cQYq_syutLqoAJwA_ZfKUwuwO08z3pgCuJb4vVCWDGLgxNbFf8F5uq_d3" target="_blank" rel="noopener" data-book>Book this clean <span aria-hidden="true">→</span></a>
+        <div class="est-copy" id="estCopy" hidden><p>In the booking notes, add: <b id="bookNote" tabindex="-1"></b></p><button type="button" id="copyNote">Copy</button><p class="copy-status" id="copyStatus" role="status"></p></div>
         <p class="est-note"><span data-cfg="deposit">$40</span> deposit holds your spot and comes off this total.<span data-hint="est" hidden></span></p>
       </aside>
     </div>
 
     <div class="others">
-      <div class="other"><h3>Airbnb turnovers</h3><p>One reliable cleaner for every turnover. Laundry <span data-cfg="extra.laundry">$25</span> a load.</p><button class="btn btn-ghost" type="button" data-quote="airbnb">Get a quote</button></div>
-      <div class="other"><h3>Organizing</h3><p>Closets, pantries and garages. <span data-cfg="organizing">$55 an hour, 3-hour minimum</span>.</p><button class="btn btn-ghost" type="button" data-quote="organizing">Get a quote</button></div>
-      <div class="other"><h3>Offices</h3><p>A fresh, clean workspace on the schedule that suits your team.</p><button class="btn btn-ghost" type="button" data-quote="office">Get a quote</button></div>
+      <div class="other"><h3>Airbnb turnovers</h3><p>One reliable cleaner for every turnover. Laundry <span data-cfg="extra.laundry">$25</span> a load.</p><a class="btn btn-ghost" href="mailto:bayareashinecleaners@gmail.com?subject=Airbnb%20turnover%20quote" data-quote="airbnb">Get a quote</a></div>
+      <div class="other"><h3>Organizing</h3><p>Closets, pantries and garages. <span data-cfg="organizing">$55 an hour, 3-hour minimum</span>.</p><a class="btn btn-ghost" href="mailto:bayareashinecleaners@gmail.com?subject=Organizing%20quote" data-quote="organizing">Get a quote</a></div>
+      <div class="other"><h3>Offices</h3><p>A fresh, clean workspace on the schedule that suits your team.</p><a class="btn btn-ghost" href="mailto:bayareashinecleaners@gmail.com?subject=Office%20cleaning%20quote" data-quote="office">Get a quote</a></div>
     </div>
   </div>
 </section>
 
 <section class="sect white crew-sect">
   <div class="wrap crew">
-    <img src="img/crew.jpg" srcset="img/crew-1200.jpg 1200w, img/crew.jpg 2400w" sizes="(max-width:820px) 100vw, 620px" width="1024" height="688" loading="lazy" alt="Cleaner wiping a kitchen counter">
+    <img src="img/crew.jpg" width="1024" height="688" loading="lazy" decoding="async" alt="Cleaner wiping a kitchen counter">
     <div>
       <span class="eyebrow">Every visit</span>
       <h2>We bring everything. Every time.</h2>
@@ -191,9 +226,9 @@
     <div class="sect-head"><div><span class="eyebrow">Service area</span><h2>64 cities across the Bay Area.</h2></div><p>From East Contra Costa down to Fremont, and across to San Francisco and Marin. Don't see your city? Email us and ask.</p></div>
     <div class="check">
       <label for="cityq">Check your city</label>
-      <input id="cityq" type="text" placeholder="Type your city, like Oakland" autocomplete="address-level2" enterkeyhint="search">
+      <input id="cityq" type="text" placeholder="Type your city, like Oakland" autocomplete="address-level2" list="cityList" aria-describedby="cityres" enterkeyhint="search">
       <p id="cityres" aria-live="polite"></p>
-      <button class="btn btn-ghost ask" type="button" id="cityAsk" hidden>Ask us about your city</button>
+      <a class="btn btn-ghost ask" href="mailto:bayareashinecleaners@gmail.com?subject=Service%20area" id="cityAsk" hidden>Ask us about your city</a>
     </div>
     <div class="groups">
       <div class="grp"><h3>East Contra Costa <small>10</small></h3><div class="chips"><span>Pittsburg</span><span>Bay Point</span><span>Antioch</span><span>Oakley</span><span>Brentwood</span><span>Bethel Island</span><span>Knightsen</span><span>Byron</span><span>Discovery Bay</span><span>Rio Vista</span></div></div>
@@ -210,13 +245,13 @@
   <div class="close">
     <svg class="big" aria-hidden="true"><use href="#sp"/></svg>
     <div class="close-copy"><h2>Ready for a home that shines?</h2><p>Grab a window online, or email us for a free quote.</p></div>
-    <div class="acts"><a class="btn btn-ink" href="#build" data-book>See open times <span aria-hidden="true">→</span></a><a class="btn btn-ghost" href="mailto:bayareashinecleaners@gmail.com?subject=Question" data-ask>Ask a question</a><a class="btn btn-ghost mail-btn" href="mailto:bayareashinecleaners@gmail.com" data-mail>bayareashinecleaners@gmail.com</a></div>
+    <div class="acts"><a class="btn btn-ink" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2Wwjx2FFDg3RgHEk2cQYq_syutLqoAJwA_ZfKUwuwO08z3pgCuJb4vVCWDGLgxNbFf8F5uq_d3" target="_blank" rel="noopener" data-book>See open times <span aria-hidden="true">→</span></a><a class="btn btn-ghost" href="mailto:bayareashinecleaners@gmail.com?subject=Question" data-ask>Ask a question</a><a class="btn btn-ghost mail-btn" href="mailto:bayareashinecleaners@gmail.com" data-mail>bayareashinecleaners@gmail.com</a></div>
   </div>
 </div>
 </main>
 
 <div class="wrap">
-  <footer><b>Bay Area Shine Cleaners</b> · Open every day, 8 AM to 6 PM · <a class="mail" href="mailto:bayareashinecleaners@gmail.com" data-mail>bayareashinecleaners@gmail.com</a> · <a class="mail" href="mailto:bayareashinecleaners@gmail.com?subject=Question" data-ask>Ask a question</a></footer>
+  <footer><img class="foot-logo" src="img/brand/bas-line-2c-light.svg" width="201" height="30" alt="" aria-hidden="true"><b>Bay Area Shine Cleaners</b> · Open every day, 8 AM to 6 PM · <a class="mail" href="mailto:bayareashinecleaners@gmail.com" data-mail>bayareashinecleaners@gmail.com</a> · <a class="mail" href="mailto:bayareashinecleaners@gmail.com?subject=Question" data-ask>Ask a question</a></footer>
 </div>
 
 <dialog class="qd" id="quote" aria-labelledby="qTitle">
@@ -243,8 +278,9 @@
       <div class="field full" id="qWinField" hidden><label for="qWin">Preferred window</label><select id="qWin"></select></div>
       <div class="field"><label for="qName">Name</label><input id="qName" type="text" autocomplete="name" required></div>
       <div class="field"><label for="qCity" id="qCityLbl">City</label><input id="qCity" type="text" autocomplete="address-level2" list="cityList" required><datalist id="cityList"></datalist></div>
-      <div class="field"><label for="qEmail">Email</label><input id="qEmail" type="email" autocomplete="email" inputmode="email"></div>
-      <div class="field"><label for="qPhone">Mobile, for texts</label><input id="qPhone" type="tel" autocomplete="tel" inputmode="tel"></div>
+      <div class="field"><label for="qEmail">Email</label><input id="qEmail" aria-describedby="qContactHint" type="email" autocomplete="email" inputmode="email"></div>
+      <div class="field"><label for="qPhone">Mobile, for texts</label><input id="qPhone" aria-describedby="qContactHint" type="tel" autocomplete="tel" inputmode="tel"></div>
+      <p class="contact-hint" id="qContactHint">Add an email or mobile number so we can reply.</p>
       <div class="field" data-home><label for="qBeds">Bedrooms</label><select id="qBeds"><option>Studio</option><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5+</option></select></div>
       <div class="field" data-home><label for="qBaths">Bathrooms</label><select id="qBaths"><option>1</option><option selected>2</option><option>3</option><option>4+</option></select></div>
       <div class="field full" id="qDateField"><label for="qDate">Preferred date</label><input id="qDate" type="text" placeholder="For example: this Saturday, or any weekday"></div>
@@ -259,8 +295,11 @@
   </form>
 </dialog>
 
-<script src="js/config.js?v=2026-10-14"></script>
 <!-- bump ?v= on every release so a cached old file never pairs with a new page -->
-<script src="js/main.js?v=2026-10-14"></script>
+<script src="js/main.js?v=2026-10-16-launch-polish"></script>
+<script src="js/app-promotion.js?v=2026-10-16-launch-polish"></script>
+<!-- Optional fonts must not delay parsing or browser form restoration. -->
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&family=Caveat:wght@600&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&family=Caveat:wght@600&display=swap"></noscript>
 </body>
 </html>

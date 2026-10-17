@@ -3,6 +3,22 @@
 window.BAS_CONFIG = {
   email: "bayareashinecleaners@gmail.com",
 
+  // App promotion stays OFF until the public listing, approved screenshot and
+  // release copy are checked and the owner approves the website release.
+  // One switch controls the hero, app links, /app and Safari banner together.
+  appPromotion: {
+    enabled: true,
+    storeUrl: "https://apps.apple.com/app/id6822942016",
+    // Actual Cleaning now UI with the owner-approved real cleaner profile.
+    // Fictional job/home only; no customer details or sample portraits.
+    screenshot: {
+      src: "img/app-cleaning-profile.png?v=2026-10-16-contact-gap",
+      width: 1206,
+      height: 2622,
+      alt: "Bay Area Shine app showing Cleaning now with your cleaner’s photo, rating and message and call buttons"
+    }
+  },
+
   // Google Calendar booking page. Empty = Book buttons open the request form.
   // Google's booking page can't open on a chosen window; the visitor taps the matching start time there.
   bookingUrl: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2Wwjx2FFDg3RgHEk2cQYq_syutLqoAJwA_ZfKUwuwO08z3pgCuJb4vVCWDGLgxNbFf8F5uq_d3",
