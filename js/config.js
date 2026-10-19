@@ -15,7 +15,7 @@ window.BAS_CONFIG = {
     // Actual Cleaning now UI with the owner-approved real cleaner profile.
     // Fictional job/home only; no customer details or sample portraits.
     screenshot: {
-      src: "img/app-cleaning-profile.webp?v=2026-10-18-help",
+      src: "img/app-cleaning-profile.webp?v=2026-10-19-price",
       width: 1206,
       height: 2622,
       alt: "Bay Area Shine app showing Cleaning now with your cleaner’s photo, rating and message and call buttons"
@@ -42,7 +42,7 @@ window.BAS_CONFIG = {
 
   // "from" prices for Step 1. Included extras show as included and are never charged.
   services: {
-    standard: { from: 140, includes: [] },
+    standard: { from: 150, includes: [] },
     deep: { from: 230, includes: ["baseboards", "windows"] },
     move: { from: 280, includes: ["oven", "fridge", "cabinets", "baseboards", "windows"], oneTimeOnly: true }
   },
@@ -50,7 +50,7 @@ window.BAS_CONFIG = {
   // Home-size prices, one per label. Extras and recurring discounts apply on top.
   sizes: {
     labels: ["Studio / 1 bed", "2 bed", "3 bed", "4+ bed"],
-    standard: [140, 185, 235, 280],
+    standard: [150, 185, 235, 280],
     deep: [230, 315, 405, 490],
     move: [280, 380, 480, 580]
   },
@@ -67,8 +67,8 @@ window.BAS_CONFIG = {
   // Move-in/move-out is one time only (services.move.oneTimeOnly).
   frequencies: [
     { id: "once", label: "One time", off: 0 },
-    { id: "weekly", label: "Weekly", off: 0.15 },
-    { id: "biweekly", label: "Every 2 weeks", off: 0.10 },
+    { id: "weekly", label: "Weekly", off: 0.10 },
+    { id: "biweekly", label: "Every 2 weeks", off: 0.07 },
     { id: "monthly", label: "Monthly", off: 0.05 }
   ],
 
