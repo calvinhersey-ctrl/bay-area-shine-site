@@ -15,7 +15,7 @@ window.BAS_CONFIG = {
     // Actual Cleaning now UI with the owner-approved real cleaner profile.
     // Fictional job/home only; no customer details or sample portraits.
     screenshot: {
-      src: "img/app-cleaning-profile.webp?v=2026-10-18-launch3",
+      src: "img/app-cleaning-profile.webp?v=2026-10-18-blog2",
       width: 1206,
       height: 2622,
       alt: "Bay Area Shine app showing Cleaning now with your cleaner’s photo, rating and message and call buttons"

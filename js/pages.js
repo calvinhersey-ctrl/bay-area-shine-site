@@ -1,4 +1,4 @@
-/* Bay Area Shine: service pages (/regular-house-cleaning/, /deep-cleaning/, /move-out-cleaning/).
+/* Bay Area Shine: service pages and the blog (/regular-house-cleaning/, /deep-cleaning/, /move-out-cleaning/, /blog/).
    The HTML already holds today's prices and policies; this refreshes them from config.js (the same
    source as the home page), so a price change there reaches these pages too. No config = HTML as is. */
 (function(){
@@ -37,4 +37,9 @@
     if (f) el.textContent = pct(f.off);
   });
   if (C.bookingUrl) document.querySelectorAll('[data-book]').forEach(a => { a.href = C.bookingUrl; });
+  /* blog app box: early access until the app is public, then the stable /app link (same switch as the home page) */
+  if (C.appPromotion && C.appPromotion.enabled === true && C.appPromotion.storeLive === true) {
+    document.querySelectorAll('[data-app-cta]').forEach(a => { a.href = '/app/'; a.textContent = 'Get the app'; });
+    document.querySelectorAll('[data-app-note]').forEach(el => { el.textContent = 'Available on the App Store. Prefer the web? You can still book online.'; });
+  }
 })();
