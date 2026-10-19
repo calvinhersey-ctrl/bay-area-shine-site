@@ -7,7 +7,7 @@ window.BAS_CONFIG = {
   // release copy are checked and the owner approves the website release.
   // One switch controls the hero, app links, /app and Safari banner together.
   appPromotion: {
-    enabled: true,
+    enabled: false,
     storeUrl: "https://apps.apple.com/app/id6822942016",
     // Actual Cleaning now UI with the owner-approved real cleaner profile.
     // Fictional job/home only; no customer details or sample portraits.
