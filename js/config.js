@@ -7,12 +7,15 @@ window.BAS_CONFIG = {
   // release copy are checked and the owner approves the website release.
   // One switch controls the hero, app links, /app and Safari banner together.
   appPromotion: {
-    enabled: false,
+    enabled: true,
+    // false until the app is public in the App Store: the launch design shows, but every badge, QR code,
+    // Safari banner and store link becomes "Get early access" → /beta/. true = badge, QR and banner point at storeUrl.
+    storeLive: false,
     storeUrl: "https://apps.apple.com/app/id6822942016",
     // Actual Cleaning now UI with the owner-approved real cleaner profile.
     // Fictional job/home only; no customer details or sample portraits.
     screenshot: {
-      src: "img/app-cleaning-profile.png?v=2026-10-16-contact-gap",
+      src: "img/app-cleaning-profile.webp?v=2026-10-18-launch3",
       width: 1206,
       height: 2622,
       alt: "Bay Area Shine app showing Cleaning now with your cleaner’s photo, rating and message and call buttons"

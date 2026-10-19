@@ -15,6 +15,10 @@
   }
   const app = window.BAS_APP;
   if (!app) return;
+  // Before the listing is public every store link becomes the beta sign-up (no badge, QR, banner or redirect).
+  const live = app.live === true && !!app.storeUrl;
+  const beta = new URL('beta/', root).href;
+  const getText = live ? 'Get the app' : 'Get early access', getHref = live ? landing : beta;
   const makeLink = (text, href, className) => {
     const a = document.createElement('a'); a.textContent = text; a.href = href;
     if (className) a.className = className;
@@ -22,6 +26,7 @@
   };
   const trademark = 'Apple and the Apple logo are trademarks of Apple Inc. App Store is a service mark of Apple Inc., registered in the U.S. and other countries.';
   function badge(){
+    if (!live) return makeLink('Get early access', beta, 'btn btn-ink app-early');
     const a = makeLink('', app.storeUrl, 'store-badge');
     const img = document.createElement('img');
     img.src = new URL('img/badges/app-store.svg', root).href;
@@ -57,7 +62,7 @@
       const home = document.createElement('span'); home.className = 'app-iphone-home'; home.setAttribute('aria-hidden', 'true');
       display.append(img, status, home);
       const frame = document.createElement('img'); frame.className = 'app-iphone-frame';
-      frame.src = new URL('img/iphone-portrait.png', root).href;
+      frame.src = new URL('img/iphone-portrait.webp', root).href;
       frame.width = 1350; frame.height = 2760; frame.alt = ''; frame.setAttribute('aria-hidden', 'true'); frame.decoding = 'async';
       device.append(display, frame);
       const caption = document.createElement('span'); caption.className = 'app-preview-label';
@@ -75,6 +80,13 @@
   }
   function legal(){
     const p = document.createElement('p'); p.className = 'app-legal'; p.textContent = trademark; return p;
+  }
+  if (appPage && !live){
+    $('#appTitle').textContent = 'Try the Bay Area Shine app early';
+    $('#appIntro').textContent = 'Our iPhone app is in testing. Get early access, or book on the web.';
+    $('#appDownload').append(badge());
+    document.documentElement.classList.add('app-promotion');
+    return;
   }
   if (appPage){
     const title = $('#appTitle'), intro = $('#appIntro');
@@ -95,10 +107,12 @@
   const hero = $('.hero'), left = $('.hero-left');
   if (!hero || !left) return;
   // Check these existing app features against the public build before release.
-  left.querySelector('p').textContent = 'Book your clean, see who’s coming and follow your visit in the Bay Area Shine app.';
+  left.querySelector('p').textContent = live ? 'Book your clean, see who’s coming and follow your visit in the Bay Area Shine app.'
+    : 'Book your clean, see who’s coming and follow your visit in the new Bay Area Shine app, now in testing.';
   const actions = document.createElement('div'); actions.className = 'app-actions';
   actions.append(badge(), makeLink('Or book on the web ↓', '#web-booking', 'app-web-link'));
-  left.append(actions, qr());
+  left.append(actions);
+  if (live) left.append(qr());
   $('.note').hidden = true;
   $('.hero-grid').appendChild(screenshot());
   const booking = $('.hero .book'); booking.id = 'web-booking';
@@ -108,26 +122,34 @@
   // Retain the existing node so its request-form fallback and focus return keep working.
   const webBook = $('.nav [data-book]');
   webBook.className = 'app-web-nav'; webBook.removeAttribute('data-book'); webBook.textContent = 'Book online';
-  webBook.after(makeLink('Get the app', landing, 'btn btn-ink app-get'));
+  // the header button stays one line beside the logo down to 360px
+  webBook.after(makeLink(live ? getText : 'Early access', getHref, 'btn btn-ink app-get'));
 
   const close = $('.close .acts'), closeBook = $('.close [data-book]');
   closeBook.textContent = 'Book on the web'; closeBook.className = 'btn btn-ghost';
-  close.prepend(makeLink('Get the app', landing, 'btn btn-ink app-get'));
+  close.prepend(makeLink(getText, getHref, 'btn btn-ink app-get'));
   const firstAnswer = $('.faq details p');
-  firstAnswer.replaceChildren('Get the Bay Area Shine app from the App Store® and choose your clean and time, or ',
+  if (live) firstAnswer.replaceChildren('Get the Bay Area Shine app from the App Store® and choose your clean and time, or ',
     makeLink('book on the web', '#web-booking', 'app-web-link'), '.');
+  else firstAnswer.replaceChildren(makeLink('Book on the web', '#web-booking', 'app-web-link'),
+    ': pick an open 3-hour window and we text to confirm. Want to try the app? ', makeLink('Get early access', beta, 'app-web-link'), '.');
   const optional = document.createElement('details'), summary = document.createElement('summary'), text = document.createElement('span'), answer = document.createElement('p');
   text.className = 't'; text.textContent = 'Do I need the app?'; summary.appendChild(text);
   answer.textContent = 'No. You can book on the web or email us for help.';
   optional.append(summary, answer); $('.faq').appendChild(optional);
   const steps = document.querySelectorAll('.howrow .step p');
-  const stepCopy = [
+  const stepCopy = live ? [
     ['Choose your clean and time', 'Use the app, or pick an open window on the web.'],
     ['Hold it with a deposit', 'Your deposit comes off the cleaning total.'],
     ['Check your booking details', 'See your booking in the app, or use your web booking confirmation.']
+  ] : [
+    ['Choose your clean and time', 'Pick an open window on the web, or use the app if you’re in the beta.'],
+    ['Hold it with a deposit', 'Your deposit comes off the cleaning total.'],
+    ['Check your booking details', 'Use your web booking confirmation, or see your booking in the app.']
   ];
   steps.forEach((p, i) => { const b = document.createElement('b'); b.textContent = stepCopy[i][0]; p.replaceChildren(b, stepCopy[i][1]); });
   const footer = $('footer');
-  footer.append(makeLink('Get the app', landing, 'mail app-footer-link'), legal());
+  footer.append(makeLink(getText, getHref, 'mail app-footer-link'));
+  if (live) footer.append(legal());
   document.documentElement.classList.add('app-promotion');
 })();
