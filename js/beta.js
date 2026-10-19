@@ -7,7 +7,7 @@
   const form = document.getElementById('betaForm');
   if (!form) return;
   const $ = id => document.getElementById(id);
-  const email = C.email || 'bayareashinecleaners@gmail.com';
+  const email = C.email || 'hello@bayareashinecleaners.com';
   const note = $('bNote'), send = $('bSend'), mail = $('bMail'), done = $('bDone');
   const SEND = 'Join the beta';
   let sending = false, sentSig = null;

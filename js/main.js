@@ -17,7 +17,7 @@
   });
 
   const FALLBACK_CONFIG = {
-    email: 'bayareashinecleaners@gmail.com',
+    email: 'hello@bayareashinecleaners.com',
     depositAmount: 40,
     quoteEndpoint: 'https://formsubmit.co/ajax/bayareashinecleaners@gmail.com',
     windows: [

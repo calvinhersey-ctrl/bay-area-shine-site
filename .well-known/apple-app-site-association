@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["9QQW5VB4LC.com.bayareashinecleaners.app"],
+        "components": [
+          { "/": "/i/*", "comment": "Client invites open the customer app" }
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": ["9QQW5VB4LC.com.bayareashinecleaners.crew"]
+  }
+}

@@ -1,0 +1,39 @@
+/* Help and legal pages: /privacy /terms /support /delete-account. Builds on style.css. */
+.doc-wrap{padding-block:8px 40px}
+.doc{width:min(100%,760px);margin-inline:auto;background:var(--paper);border:1px solid var(--line);border-radius:28px;padding:clamp(22px,5vw,44px);box-shadow:0 30px 60px -36px rgba(30,58,138,.45);overflow-wrap:break-word}
+.doc > *+*{margin-top:14px}
+.doc h1{font-size:clamp(32px,6vw,46px);line-height:1.05;font-weight:800}
+.doc h2{font-size:clamp(22px,4.6vw,28px);line-height:1.15;margin-top:36px}
+.doc h3{font-size:19px;line-height:1.25;margin-top:24px}
+.doc h2+*,.doc h3+*{margin-top:10px}
+.doc .meta{font-size:15px;font-weight:600;color:var(--teal);margin-top:8px}
+.doc ul,.doc ol{padding-left:1.25em}
+.doc li{margin-top:8px;padding-left:2px}
+.doc li>ul{margin-top:6px}
+.doc strong{color:var(--ink)}
+.doc .lede{font-size:19px}
+.doc .callout{background:var(--chip);border-radius:20px;padding:18px 20px}
+.doc .callout>*+*{margin-top:10px}
+.doc .emergency{background:#FFF6DA;border:1px solid var(--sun);border-radius:20px;padding:14px 18px;font-weight:600;color:var(--ink)}
+.doc .acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+.doc .acts .btn{max-width:100%}
+@media (max-width:520px){.doc .acts .btn{width:100%}}
+.doc a{overflow-wrap:anywhere}
+/* inline links keep the text flow but get a 44px tap area through padding (no layout shift) */
+.doc a:not(.btn){padding-block:12px;padding-inline:2px}
+.doc .mail{padding-block:10px}
+.doc-table{width:100%;border-collapse:collapse;font-size:16px}
+.doc-table th,.doc-table td{text-align:left;vertical-align:top;padding:12px 10px;border-bottom:1px solid var(--line)}
+.doc-table th{color:var(--ink);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.doc-table td:first-child{font-weight:700;color:var(--ink);width:44%}
+@media (max-width:560px){
+  .doc-table,.doc-table tbody,.doc-table tr,.doc-table td{display:block;width:100%}
+  .doc-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .doc-table tr{padding:12px 0;border-bottom:1px solid var(--line)}
+  .doc-table th,.doc-table td{border:0;padding:0}
+  .doc-table td:first-child{width:100%;margin-bottom:2px}
+}
+.doc-foot{display:flex;flex-wrap:wrap;align-items:center;gap:0 18px;padding-block:8px 40px;font-size:15px}
+.doc-foot a{display:inline-flex;align-items:center;min-height:44px;font-weight:600}
+.doc-foot b{margin-right:6px;color:var(--ink)}
+.top .back{display:inline-flex;align-items:center;min-height:44px;padding-inline:8px;color:var(--ink);font-weight:600;text-decoration:none;font-size:15px}

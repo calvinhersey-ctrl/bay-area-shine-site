@@ -1,7 +1,7 @@
 /* Bay Area Shine site settings: links, prices, policies and reviews.
    main.js reads these keys, so the page never hard-codes them. Load this file first. */
 window.BAS_CONFIG = {
-  email: "bayareashinecleaners@gmail.com",
+  email: "hello@bayareashinecleaners.com",
 
   // App promotion stays OFF until the public listing, approved screenshot and
   // release copy are checked and the owner approves the website release.
@@ -15,7 +15,7 @@ window.BAS_CONFIG = {
     // Actual Cleaning now UI with the owner-approved real cleaner profile.
     // Fictional job/home only; no customer details or sample portraits.
     screenshot: {
-      src: "img/app-cleaning-profile.webp?v=2026-10-18-blog2",
+      src: "img/app-cleaning-profile.webp?v=2026-10-18-help",
       width: 1206,
       height: 2622,
       alt: "Bay Area Shine app showing Cleaning now with your cleaner’s photo, rating and message and call buttons"

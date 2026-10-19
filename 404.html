@@ -8,13 +8,13 @@
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#1E3A8A">
 <!-- Root-relative links also work when this page is served at a missing nested URL. -->
-<link rel="icon" href="/favicon.ico?v=2026-10-18-blog2" sizes="48x48">
-<link rel="icon" href="/favicon.svg?v=2026-10-18-blog2" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2026-10-18-blog2">
+<link rel="icon" href="/favicon.ico?v=2026-10-18-help" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=2026-10-18-help" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2026-10-18-help">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="/css/style.css?v=2026-10-18-blog2">
-<link rel="stylesheet" href="/css/app.css?v=2026-10-18-blog2">
+<link rel="stylesheet" href="/css/style.css?v=2026-10-18-help">
+<link rel="stylesheet" href="/css/app.css?v=2026-10-18-help">
 </head>
 <body class="app-landing">
 <main class="app-card">
@@ -26,8 +26,19 @@
     <a class="btn btn-ghost" href="/#build">See prices</a>
     <a class="btn btn-ghost" href="/">Back to home</a>
   </div>
-  <a class="mail" href="mailto:bayareashinecleaners@gmail.com">bayareashinecleaners@<wbr>gmail.com</a>
+  <a class="mail" href="mailto:hello@bayareashinecleaners.com">bayareashinecleaners@<wbr>gmail.com</a>
 </main>
+<script>
+/* Invite links (/i/CODE) open the app when it's installed. Without the app, show a kind note instead of "not found". Nothing private is shown. */
+(function(){
+  if (!/^\/i\/[A-Za-z0-9]+\/?$/.test(location.pathname)) return;
+  var h = document.querySelector('.app-card h1'), p = document.querySelector('.app-card p'), acts = document.querySelector('.app-actions');
+  if (h) h.textContent = 'Your invite is waiting in the app.';
+  if (p) p.textContent = 'Open this link on your iPhone to finish setting up your home. If you don\u2019t have the app yet, get it first, then tap the link again.';
+  if (acts) acts.innerHTML = '<a class="btn btn-ink" href="https://apps.apple.com/app/id6822942016">Get the app</a><a class="btn btn-ghost" href="/">Back to home</a>';
+  document.title = 'Your Bay Area Shine invite';
+})();
+</script>
 <!-- Optional fonts must not delay parsing or browser form restoration. -->
 <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&display=swap">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&display=swap"></noscript>
