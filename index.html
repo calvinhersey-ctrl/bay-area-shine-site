@@ -19,15 +19,15 @@
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:alt" content="A bright, spotless kitchen with a royal blue towel on the oven">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="favicon.ico?v=2026-10-19-price" sizes="48x48">
-<link rel="icon" href="favicon.svg?v=2026-10-19-price" type="image/svg+xml">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=2026-10-19-price">
+<link rel="icon" href="favicon.ico?v=2026-10-20-sizes" sizes="48x48">
+<link rel="icon" href="favicon.svg?v=2026-10-20-sizes" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=2026-10-20-sizes">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="css/style.css?v=2026-10-19-price">
-<link rel="stylesheet" href="css/app.css?v=2026-10-19-price">
-<script src="js/config.js?v=2026-10-19-price"></script>
-<script src="js/app-banner.js?v=2026-10-19-price"></script>
+<link rel="stylesheet" href="css/style.css?v=2026-10-20-sizes">
+<link rel="stylesheet" href="css/app.css?v=2026-10-20-sizes">
+<script src="js/config.js?v=2026-10-20-sizes"></script>
+<script src="js/app-banner.js?v=2026-10-20-sizes"></script>
 <!-- Search engines: who we are and where we clean. No address or phone (site rules). The cities are the 64 chips in #area; keep them the same. -->
 <script type="application/ld+json">
 {
@@ -112,12 +112,84 @@
     {"@type": "City", "name": "Novato"}
    ],
    "makesOffer": [
-    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Standard home cleaning"}},
-    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Deep cleaning"}},
-    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Move-in and move-out cleaning"}},
-    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Airbnb turnover cleaning"}},
-    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Home organizing"}},
-    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Office cleaning"}}
+    {
+     "@type": "Offer",
+     "priceCurrency": "USD",
+     "priceSpecification": {
+      "@type": "PriceSpecification",
+      "minPrice": 150,
+      "priceCurrency": "USD"
+     },
+     "itemOffered": {
+      "@type": "Service",
+      "name": "Standard home cleaning",
+      "description": "Kitchen, bathrooms, bedrooms and floors, done right every visit. Prices by home size: Studio / 1 bed $150, 2 bed $185, 3 bed $235, 4 bed $280, 5 bed $340, 6+ bed $400. Weekly visits save 10%, every 2 weeks 7%, and monthly 5%. Bathrooms included: Studio / 1 bed 1, 2 bed 2, 3 bed 2, 4 bed 3, 5 bed 3, 6+ bed 4. Each extra bathroom adds $20."
+     }
+    },
+    {
+     "@type": "Offer",
+     "priceCurrency": "USD",
+     "priceSpecification": {
+      "@type": "PriceSpecification",
+      "minPrice": 230,
+      "priceCurrency": "USD"
+     },
+     "itemOffered": {
+      "@type": "Service",
+      "name": "Deep cleaning",
+      "description": "Everything in a Standard clean, plus baseboards and buildup. Inside windows, door frames, cabinet fronts and tile and grout are all part of it. Prices by home size: Studio / 1 bed $230, 2 bed $315, 3 bed $405, 4 bed $490, 5 bed $595, 6+ bed $700. Bathrooms included: Studio / 1 bed 1, 2 bed 2, 3 bed 2, 4 bed 3, 5 bed 3, 6+ bed 4. Each extra bathroom adds $35."
+     }
+    },
+    {
+     "@type": "Offer",
+     "priceCurrency": "USD",
+     "priceSpecification": {
+      "@type": "PriceSpecification",
+      "minPrice": 280,
+      "priceCurrency": "USD"
+     },
+     "itemOffered": {
+      "@type": "Service",
+      "name": "Move-in and move-out cleaning",
+      "description": "Empty home, inside cabinets and appliances, ready for keys. Everything in a Deep clean, plus the inside of the oven, fridge and cabinets. One time only. Prices by home size: Studio / 1 bed $280, 2 bed $380, 3 bed $480, 4 bed $580, 5 bed $705, 6+ bed $830. Bathrooms included: Studio / 1 bed 1, 2 bed 2, 3 bed 2, 4 bed 3, 5 bed 3, 6+ bed 4. Each extra bathroom adds $40."
+     }
+    },
+    {
+     "@type": "Offer",
+     "itemOffered": {
+      "@type": "Service",
+      "name": "Airbnb turnover cleaning",
+      "description": "One reliable cleaner for every turnover. Laundry $25 a load."
+     }
+    },
+    {
+     "@type": "Offer",
+     "priceCurrency": "USD",
+     "priceSpecification": {
+      "@type": "UnitPriceSpecification",
+      "price": 55,
+      "priceCurrency": "USD",
+      "unitCode": "HUR",
+      "eligibleQuantity": {
+       "@type": "QuantitativeValue",
+       "minValue": 3,
+       "unitCode": "HUR"
+      }
+     },
+     "itemOffered": {
+      "@type": "Service",
+      "name": "Home organizing",
+      "description": "Closets, pantries and garages. $55 an hour, 3-hour minimum."
+     }
+    },
+    {
+     "@type": "Offer",
+     "itemOffered": {
+      "@type": "Service",
+      "name": "Office cleaning",
+      "description": "A fresh, clean workspace on the schedule that suits your team."
+     }
+    }
    ]
   },
   {
@@ -129,6 +201,110 @@
    "publisher": {
     "@id": "https://www.bayareashinecleaners.com/#business"
    }
+  }
+ ]
+}
+</script>
+<!-- FAQ and reviews copied word for word from the page (#faq, config.js reviews). Update with them. Same business as above via @id. -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "FAQPage",
+   "@id": "https://www.bayareashinecleaners.com/#faq",
+   "url": "https://www.bayareashinecleaners.com/",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "How do I book?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Tap See open times and pick a 3-hour window: 8–11 AM, 11 AM–2 PM or 2–5 PM, any day. We text to confirm."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "What is the $40 deposit for?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "It holds your spot and comes off your cleaning total. It's non-refundable. Unpaid bookings are released after 24 hours."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Can I reschedule?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. Rescheduling is free with 48 hours' notice."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "What if you miss a spot?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Tell us within 24 hours and we come back to fix it, free."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Do I need to be home?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No. Many clients give us a door code or leave a key. Tell us how to get in when you book."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Do you bring supplies?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. We bring all the cleaning supplies and equipment. If you'd rather we use your own products, leave them out and tell us in the notes."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "What if I have pets?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "That's fine. Tell us about them in the notes, and please keep them secured or out of the way while we work."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Do you offer regular cleanings?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. Weekly visits save 10%, every 2 weeks 7%, and monthly 5%. Move-in and move-out cleans are one time."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "How do I pay?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "The $40 deposit is paid online by card when you book. The rest is due once the clean is done, and we send the payment details with your confirmation."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "What isn't included?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "We don't move heavy furniture, wash outside windows, or clean mold, biohazards or pest messes. Ask if you're not sure."
+     }
+    }
+   ]
+  },
+  {
+   "@type": "LocalBusiness",
+   "@id": "https://www.bayareashinecleaners.com/#business",
+   "review": [
+    {"@type":"Review","name":"Raymeshia W. · Antioch","author":{"@type":"Person","name":"Raymeshia W."},"reviewBody":"The quality of work and attention to detail is unmatched. I definitely will use Bay Area Shine in the future."},
+    {"@type":"Review","name":"Vanessa P. · Berkeley","author":{"@type":"Person","name":"Vanessa P."},"reviewBody":"Amazing service! Super reliable, detail-oriented, and my place has never looked better. Highly recommend!"},
+    {"@type":"Review","name":"Karen M. · Walnut Creek","author":{"@type":"Person","name":"Karen M."},"reviewBody":"This company is amazing! I'm definitely hiring them again! Highly recommend 👌"}
+   ]
   }
  ]
 }
@@ -225,7 +401,7 @@
         <div class="room" id="room" role="tabpanel" tabindex="0" aria-label="Room photo with extras"><img id="roomImg" src="img/room-kitchen.jpg" width="1024" height="688" loading="lazy" decoding="async" alt="Kitchen with oven, fridge, cabinets and a window"></div>
       </div>
       <aside class="est" aria-label="Your estimate">
-        <div id="sizeBox"><div class="lbl" id="sizeLbl">3 · Home size</div><div class="seg four" id="sizeSeg" role="group" aria-labelledby="sizeLbl"></div></div>
+        <div id="sizeBox"><div class="lbl" id="sizeLbl">3 · Home size</div><div class="seg" id="sizeSeg" role="group" aria-labelledby="sizeLbl"></div><div class="lbl lbl-sub" id="bathLbl">Bathrooms</div><div class="seg" id="bathSeg" role="group" aria-labelledby="bathLbl"></div></div>
         <div><div class="lbl" id="freqLbl">4 · How often</div><div class="seg four" id="freqSeg" role="group" aria-labelledby="freqLbl"></div></div>
         <div><div class="lbl">Your estimate</div><div class="lines" id="lines"></div></div>
         <div class="total" aria-live="polite"><span>Starting at</span><span class="tot" id="tot"><b id="total" tabindex="-1">$150</b><b class="roll" aria-hidden="true"></b></span></div>
@@ -358,8 +534,8 @@
       <div class="field"><label for="qEmail">Email</label><input id="qEmail" aria-describedby="qContactHint" type="email" autocomplete="email" inputmode="email"></div>
       <div class="field"><label for="qPhone">Mobile, for texts</label><input id="qPhone" aria-describedby="qContactHint" type="tel" autocomplete="tel" inputmode="tel"></div>
       <p class="contact-hint" id="qContactHint">Add an email or mobile number so we can reply.</p>
-      <div class="field" data-home><label for="qBeds">Bedrooms</label><select id="qBeds"><option>Studio</option><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5+</option></select></div>
-      <div class="field" data-home><label for="qBaths">Bathrooms</label><select id="qBaths"><option>1</option><option selected>2</option><option>3</option><option>4+</option></select></div>
+      <div class="field" data-home><label for="qBeds">Bedrooms</label><select id="qBeds"><option>Studio</option><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6+</option></select></div>
+      <div class="field" data-home><label for="qBaths">Bathrooms</label><select id="qBaths"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6+</option></select></div>
       <div class="field full" id="qDateField"><label for="qDate">Preferred date</label><input id="qDate" type="text" placeholder="For example: this Saturday, or any weekday"></div>
       <div class="field full"><label for="qNotes" id="qNotesLbl">Anything else we should know</label><textarea id="qNotes" rows="3" placeholder="Pets, parking, how to get in"></textarea></div>
     </div>
@@ -373,8 +549,8 @@
 </dialog>
 
 <!-- bump ?v= on every release so a cached old file never pairs with a new page -->
-<script src="js/main.js?v=2026-10-19-price"></script>
-<script src="js/app-promotion.js?v=2026-10-19-price"></script>
+<script src="js/main.js?v=2026-10-20-sizes"></script>
+<script src="js/app-promotion.js?v=2026-10-20-sizes"></script>
 <!-- Optional fonts must not delay parsing or browser form restoration. -->
 <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&family=Caveat:wght@600&display=swap">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&family=Caveat:wght@600&display=swap"></noscript>

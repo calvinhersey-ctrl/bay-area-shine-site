@@ -26,15 +26,18 @@
       {id:'afternoon', part:'Afternoon', label:'2–5 PM'}
     ],
     services: {
-      standard: {from:140, includes:[]},
+      standard: {from:150, includes:[]},
       deep: {from:230, includes:['baseboards','windows']},
       move: {from:280, includes:['oven','fridge','cabinets','baseboards','windows'], oneTimeOnly:true}
     },
     sizes: {
-      labels: ['Studio / 1 bed','2 bed','3 bed','4+ bed'],
-      standard: [140,185,235,280],
-      deep: [230,315,405,490],
-      move: [280,380,480,580]
+      labels: ['Studio / 1 bed','2 bed','3 bed','4 bed','5 bed','6+ bed'],
+      standard: [150,185,235,280,340,400],
+      deep: [230,315,405,490,595,700],
+      move: [280,380,480,580,705,830],
+      bathsIncluded: [1,2,2,3,3,4],
+      extraBath: {standard:20, deep:35, move:40},
+      maxBaths: 6
     },
     extras: {
       oven: {label:'Inside oven', price:35},
@@ -46,8 +49,8 @@
     },
     frequencies: [
       {id:'once', label:'One time', off:0},
-      {id:'weekly', label:'Weekly', off:0.15},
-      {id:'biweekly', label:'Every 2 weeks', off:0.10},
+      {id:'weekly', label:'Weekly', off:0.10},
+      {id:'biweekly', label:'Every 2 weeks', off:0.07},
       {id:'monthly', label:'Monthly', off:0.05}
     ],
     organizing: {hourly:55, minHours:3},
@@ -85,6 +88,13 @@
   const svc = id => C.services[id] || {from:0, includes:[]};
   const incl = id => (svc(id).includes || []).filter(k => C.extras[k]);
   const sizeLabels = (C.sizes && C.sizes.labels) || [];
+  /* Bathrooms: each size includes some; every one beyond that adds extraBath[service]. Missing in config = no bathroom pricing. */
+  const bathsIncl = (C.sizes && C.sizes.bathsIncluded) || [];
+  const maxBaths = (C.sizes && C.sizes.maxBaths) || 6;
+  const hasBaths = bathsIncl.length > 0;
+  const inclBaths = size => (bathsIncl[size] != null ? bathsIncl[size] : 1);
+  const bathRate = id => ((C.sizes && C.sizes.extraBath) || {})[id] || 0;
+  const bathCount = n => Math.min(Math.max(Math.round(n) || 1, 1), maxBaths);
   function basePrice(id, size){
     const row = C.sizes && C.sizes[id];
     return row && row[size] != null ? row[size] : svc(id).from;
@@ -119,13 +129,14 @@
     svc: 'standard', size: 0, freq: 'once', room: 'kitchen',
     picked: new Set()
   };
+  st.baths = inclBaths(st.size); st.bathsPicked = false;
   let sizeEdits = 0, windowEdits = 0, serviceEdits = 0;
   // Only nonpersonal picker choices, for this tab. Never persist form fields or quoted prices.
   const DRAFT_KEY = 'bas-estimate-v1';
   function saveEstimate(){
     try {
       sessionStorage.setItem(DRAFT_KEY, JSON.stringify({
-        svc:st.svc, size:st.size, freq:st.freq, room:st.room,
+        svc:st.svc, size:st.size, baths:st.baths, bathsPicked:st.bathsPicked === true, freq:st.freq, room:st.room,
         win:st.win, winPicked:st.winPicked === true, picked:Array.from(st.picked)
       }));
     } catch { /* Storage can be unavailable in private/locked-down browsers. The picker still works. */ }
@@ -218,6 +229,8 @@
     if (isObj(draft)){
       if (SVC_IDS.includes(draft.svc)) st.svc = draft.svc;
       if (Number.isInteger(draft.size) && draft.size >= 0 && draft.size < sizeLabels.length) st.size = draft.size;
+      st.baths = inclBaths(st.size);
+      if (draft.bathsPicked === true && Number.isInteger(draft.baths) && draft.baths >= 1 && draft.baths <= maxBaths) { st.baths = draft.baths; st.bathsPicked = true; }
       if (!oneTime(st.svc) && C.frequencies.some(f => f.id === draft.freq)) st.freq = draft.freq;
       if (ROOMS.some(r => r.id === draft.room)) st.room = draft.room;
       if (C.windows.some(w => w.id === draft.win)) { st.win = draft.win; st.winPicked = draft.winPicked === true; }
@@ -226,13 +239,15 @@
   } catch { /* Old/corrupt data must never stop booking. */ }
   renderWins();
 
-  function estimate(id, size, freqId, picked){
+  function estimate(id, size, freqId, picked, baths){
     const base = basePrice(id, size), inc = incl(id);
+    const extraBaths = hasBaths && baths != null ? Math.max(0, bathCount(baths) - inclBaths(size)) : 0;
+    const bathCost = extraBaths * bathRate(id);
     const f = oneTime(id) ? C.frequencies[0] : (C.frequencies.find(x => x.id === freqId) || C.frequencies[0]);
     const extras = Object.keys(C.extras).filter(k => picked.has(k) && !inc.includes(k));
-    const sub = base + extras.reduce((t, k) => t + C.extras[k].price, 0);
+    const sub = base + bathCost + extras.reduce((t, k) => t + C.extras[k].price, 0);
     const off = Math.round(sub * (f.off || 0));
-    return {base, inc, extras, f, off, total: sub - off};
+    return {base, extraBaths, bathCost, inc, extras, f, off, total: sub - off};
   }
 
   const tabs = $('#tabs'), room = $('#room'), roomImg = $('#roomImg');
@@ -305,13 +320,20 @@
       return b;
     }));
   }
-  const svcSeg = $('#svcSeg'), sizeSeg = $('#sizeSeg'), freqSeg = $('#freqSeg');
+  const svcSeg = $('#svcSeg'), sizeSeg = $('#sizeSeg'), bathSeg = $('#bathSeg'), freqSeg = $('#freqSeg');
   $$('button', svcSeg).forEach(b => b.addEventListener('click', () => {
     st.svc = b.dataset.svc; serviceEdits++; if (oneTime(st.svc)) st.freq = 'once';
     renderSeg(); renderPicks();
   }));
-  if (sizeLabels.length) seg(sizeSeg, sizeLabels.map((l, i) => [String(i), '']), id => { st.size = +id; sizeEdits++; renderSeg(); renderPicks(); });
+  if (sizeLabels.length) seg(sizeSeg, sizeLabels.map((l, i) => [String(i), '']), id => {
+    st.size = +id; sizeEdits++;
+    if (!st.bathsPicked) st.baths = inclBaths(st.size);
+    renderSeg(); renderPicks();
+  });
   else $('#sizeBox').hidden = true;
+  if (hasBaths && sizeLabels.length){
+    seg(bathSeg, Array.from({length:maxBaths}, (_, i) => [String(i + 1), '']), id => { st.baths = +id; st.bathsPicked = true; sizeEdits++; renderSeg(); renderPicks(); });
+  } else { $('#bathLbl').hidden = true; bathSeg.hidden = true; }
   seg(freqSeg, C.frequencies.map(f => [f.id, '']), id => { st.freq = id; renderSeg(); renderPicks(); });
   $$('button', freqSeg).forEach((b, i) => {
     const f = C.frequencies[i]; b.textContent = f.label;
@@ -324,6 +346,13 @@
       b.setAttribute('aria-pressed', i === st.size);
       b.textContent = sizeLabels[i];
       const s = document.createElement('small'); s.textContent = money(basePrice(st.svc, i)); b.appendChild(s);
+    });
+    $$('button', bathSeg).forEach((b, i) => {
+      const n = i + 1, extra = Math.max(0, n - inclBaths(st.size)) * bathRate(st.svc);
+      b.setAttribute('aria-pressed', n === st.baths);
+      b.textContent = n === maxBaths ? n + '+' : String(n);
+      b.setAttribute('aria-label', n + (n === maxBaths ? ' or more' : '') + (n === 1 ? ' bathroom' : ' bathrooms') + (extra ? ', adds ' + money(extra) : ', included'));
+      const s = document.createElement('small'); s.textContent = extra ? '+' + money(extra) : 'included'; b.appendChild(s);
     });
     $$('button', freqSeg).forEach(b => { b.setAttribute('aria-pressed', b.dataset.id === st.freq); b.disabled = oneTime(st.svc) && b.dataset.id !== 'once'; });
     renderChecklist();
@@ -354,8 +383,9 @@
       $('.lab', h).textContent = inc ? e.label + ' · included' : e.label + ' ' + (e.from ? 'from $' : '+$') + e.price;
       h.setAttribute('aria-label', inc ? e.label + ', included in a ' + SVC_LINE[st.svc] : e.label + ', add ' + extraPrice(e));
     });
-    const est = estimate(st.svc, st.size, st.freq, st.picked);
+    const est = estimate(st.svc, st.size, st.freq, st.picked, st.baths);
     const lines = [row('', SVC_LINE[st.svc] + (sizeLabels[st.size] ? ', ' + sizeLabels[st.size] : ''), money(est.base))];
+    if (est.extraBaths) lines.push(row('x extra', '+ ' + est.extraBaths + ' extra ' + (est.extraBaths === 1 ? 'bathroom' : 'bathrooms'), money(est.bathCost)));
     est.inc.forEach(k => lines.push(row('inc', '✓ ' + C.extras[k].label, 'Included')));
     est.extras.forEach(k => {
       const d = row('x extra', '+ ' + C.extras[k].label, extraPrice(C.extras[k]));
@@ -416,6 +446,7 @@
   /* Google's booking page can't take our build, so we hand the customer a line to paste into its notes */
   function bookNote(est){
     const parts = [SVC_LINE[st.svc], (sizeLabels[st.size] || '').toLowerCase()]
+      .concat(hasBaths ? [st.baths + (st.baths === maxBaths ? '+' : '') + (st.baths === 1 ? ' bath' : ' baths')] : [])
       .concat(est.extras.map(k => C.extras[k].label.toLowerCase().replace(/, (.+)$/, ' ($1)')))
       .concat(est.f.label.toLowerCase());
     return parts.filter(Boolean).join(', ') + ', estimate ' + money(est.total) + '.';
@@ -500,7 +531,7 @@
     cancelAnimationFrame(sweepRaf);
     box.classList.add('go', 'done'); reveal.classList.add('on');
     $$('.burst').forEach(s => s.remove());
-    showTotal(estimate(st.svc, st.size, st.freq, st.picked).total);
+    showTotal(estimate(st.svc, st.size, st.freq, st.picked, st.baths).total);
   }
   if (motionPreference.addEventListener) motionPreference.addEventListener('change', updateMotion);
   else if (motionPreference.addListener) motionPreference.addListener(updateMotion);
@@ -582,9 +613,10 @@
   const isQ = () => f('qService').value === 'question';
   const sendLabel = () => isQ() ? 'Send question' : 'Send request';
   const noteDefault = () => isQ() ? 'Your question goes straight to our inbox.' : 'Send request goes straight to our inbox.';
-  /* Bedrooms in the form set the home size it prices (Studio and 1 → first size, 4 and 5+ → last) */
-  const BEDS_TO_SIZE = [0, 0, 1, 2, 3, 3];
+  /* Bedrooms in the form set the home size it prices (Studio and 1 → first size, 6+ → last; baths 1 to 5, 6+) */
+  const BEDS_TO_SIZE = [0, 0, 1, 2, 3, 4, 5];
   const formSize = () => Math.min(BEDS_TO_SIZE[f('qBeds').selectedIndex] ?? st.size, Math.max(sizeLabels.length - 1, 0));
+  const formBaths = () => bathCount(f('qBaths').selectedIndex + 1);
   let mode = 'quote', opener = null, sending = false, sentSig = null, sentWho = '', backdropPress = false;
   let seededSize = -1, seededWindow = -1;
   let seededService = null, seededCity = null;
@@ -638,7 +670,8 @@
     // A changed search prefills its new city; reopening the same search keeps any form correction.
     if (o.city != null && seededCity !== o.city){ f('qCity').value = o.city; seededCity = o.city; }
     if (SVC_IDS.includes(f('qService').value) && seededSize !== sizeEdits){
-      f('qBeds').selectedIndex = Math.min(st.size + 1, f('qBeds').options.length - 1); seededSize = sizeEdits;
+      f('qBeds').selectedIndex = Math.min(st.size + 1, f('qBeds').options.length - 1);
+      f('qBaths').selectedIndex = Math.min(st.baths - 1, f('qBaths').options.length - 1); seededSize = sizeEdits;
     }
     note.className = 'form-note'; note.textContent = ''; delete note.dataset.state; feedbackSig = null;
     renderForm();
@@ -666,8 +699,9 @@
   function formEstimate(){
     const id = f('qService').value;
     if (SVC_IDS.includes(id)){
-      const size = formSize(), est = estimate(id, size, formBuild.freq, formBuild.picked);
+      const size = formSize(), est = estimate(id, size, formBuild.freq, formBuild.picked, formBaths());
       const bits = [SVC_LINE[id] + (sizeLabels[size] ? ', ' + sizeLabels[size] : '') + ' ' + money(est.base)];
+      if (est.extraBaths) bits.push(est.extraBaths + ' extra ' + (est.extraBaths === 1 ? 'bathroom' : 'bathrooms') + ' ' + money(est.bathCost));
       est.extras.forEach(k => bits.push(C.extras[k].label + ' ' + extraPrice(C.extras[k])));
       if (est.off) bits.push(est.f.label + ' −' + money(est.off));
       return {price: 'Starting at ' + money(est.total), note: bits.join(' + ').replace('+ ' + est.f.label, '· ' + est.f.label) + '. We confirm your exact price before we clean.'};
@@ -776,7 +810,7 @@
     return true;
   }
   function editForm(event){
-    if (event.target === f('qBeds')) seededSize = sizeEdits;
+    if (event.target === f('qBeds') || event.target === f('qBaths')) seededSize = sizeEdits;
     if (event.target === f('qWin')) seededWindow = windowEdits;
     clearValidation();
     // Delivery/email guidance describes the old request, not an edited draft.

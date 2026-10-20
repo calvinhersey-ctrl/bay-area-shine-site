@@ -16,6 +16,7 @@
     discounts: discounts.length > 2 ? discounts.slice(0, -1).join(', ') + ', and ' + discounts[discounts.length - 1] : discounts.join(' and ') || null
   };
   Object.keys(C.services || {}).forEach(id => { text['from.' + id] = money(C.services[id].from); });
+  Object.keys((C.sizes && C.sizes.extraBath) || {}).forEach(k => { text['bath.' + k] = '+' + money(C.sizes.extraBath[k]); });
   Object.keys(C.extras || {}).forEach(k => {
     const e = C.extras[k];
     text['extra.' + k] = (e.from ? 'from ' : '') + money(e.price) + (k === 'laundry' ? ' a load' : '');

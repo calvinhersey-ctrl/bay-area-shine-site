@@ -15,7 +15,7 @@ window.BAS_CONFIG = {
     // Actual Cleaning now UI with the owner-approved real cleaner profile.
     // Fictional job/home only; no customer details or sample portraits.
     screenshot: {
-      src: "img/app-cleaning-profile.webp?v=2026-10-19-price",
+      src: "img/app-cleaning-profile.webp?v=2026-10-20-sizes",
       width: 1206,
       height: 2622,
       alt: "Bay Area Shine app showing Cleaning now with your cleaner’s photo, rating and message and call buttons"
@@ -47,13 +47,18 @@ window.BAS_CONFIG = {
     move: { from: 280, includes: ["oven", "fridge", "cabinets", "baseboards", "windows"], oneTimeOnly: true }
   },
 
-  // Home-size prices, one per label. Extras and recurring discounts apply on top.
+  // Home-size prices, one per label. Bathrooms, extras and recurring discounts apply on top.
   sizes: {
-    labels: ["Studio / 1 bed", "2 bed", "3 bed", "4+ bed"],
-    standard: [150, 185, 235, 280],
-    deep: [230, 315, 405, 490],
-    move: [280, 380, 480, 580]
+    labels: ["Studio / 1 bed", "2 bed", "3 bed", "4 bed", "5 bed", "6+ bed"],
+    standard: [150, 185, 235, 280, 340, 400],
+    deep: [230, 315, 405, 490, 595, 700],
+    move: [280, 380, 480, 580, 705, 830],
+    // Bathrooms included in each size's price; each one beyond that adds extraBath[service]. 6+ baths is priced as 6.
+    bathsIncluded: [1, 2, 2, 3, 3, 4],
+    extraBath: { standard: 20, deep: 35, move: 40 },
+    maxBaths: 6
   },
+
 
   extras: {
     oven: { label: "Inside oven", price: 35 },
