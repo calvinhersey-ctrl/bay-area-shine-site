@@ -469,3 +469,15 @@ html:has(dialog[open]){overflow:hidden}
   .tot.rolling #total{color:CanvasText}
   .tot .roll{display:none}
 }
+
+/* /crew and /crew/pt: cleaner recruiting page */
+.crew-hero{grid-template-columns:1fr;padding-bottom:40px}
+.crew-hero .svc-lead{max-width:640px}
+.crew-soon{margin-top:14px;font-size:15px;max-width:560px}
+.pitch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.pitch{background:var(--fog);border:1px solid var(--line);border-radius:20px;padding:20px}
+.pitch h3{font-size:21px;margin-bottom:6px}
+.pitch:last-child{background:var(--sun);border-color:var(--sun);grid-column:1/-1}
+.pitch:last-child p{color:var(--ink)}
+@media (min-width:900px){.pitch-grid{grid-template-columns:repeat(3,1fr)}.pitch:last-child{grid-column:span 3}}
+@media (max-width:520px){.crew-hero .acts .btn{width:100%}}

@@ -166,7 +166,7 @@
     $$('.win', winBox).forEach(b => b.setAttribute('aria-pressed', b.dataset.win === st.win));
     const w = C.windows.find(x => x.id === st.win) || {}, starts = C.windows.map(winStart).filter(Boolean);
     $$('[data-hint]').forEach(el => {
-      el.hidden = !C.bookingUrl || !starts.length;
+      el.hidden = !C.bookingUrl || C.bookingIsCalendar === false || !starts.length;
       el.textContent = (el.dataset.hint === 'est' ? ' ' : '') + (el.dataset.hint === 'hero' || st.winPicked
         ? 'On the next page, tap the ' + winStart(w) + ' start.'
         : 'On the next page, tap the ' + listJoin(starts, 'or') + ' start.');
@@ -402,7 +402,7 @@
     lastLines = new Set(lines.map(key));
     $('#lines').replaceChildren(...lines);
     showTotal(est.total);
-    $('#estCopy').hidden = !C.bookingUrl;
+    $('#estCopy').hidden = !C.bookingUrl || C.bookingIsCalendar === false;
     $('#bookNote').textContent = bookNote(est);
     clearTimeout(copyTimer);
     $('#copyStatus').textContent = copying ? 'Copying booking notes…' : '';
