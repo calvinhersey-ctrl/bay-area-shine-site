@@ -11,7 +11,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Bay Area Shine Cleaners">
 <meta property="og:title" content="Bay Area Shine Cleaners · Pick a time. We bring the shine.">
-<meta property="og:description" content="Home cleaning, Airbnb turnovers, organizing and offices across the Bay Area. Build your price, pick a 3-hour window online, and we text to confirm.">
+<meta property="og:description" content="Home cleaning, Airbnb turnovers, organizing and offices across the Bay Area. Build your price, then book in the app.">
 <meta property="og:url" content="https://www.bayareashinecleaners.com/">
 <meta property="og:image" content="https://www.bayareashinecleaners.com/img/sweep-clean.jpg">
 <meta property="og:image:width" content="1024">
@@ -19,15 +19,15 @@
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:alt" content="A bright, spotless kitchen with a royal blue towel on the oven">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="favicon.ico?v=2026-10-22-flip" sizes="48x48">
-<link rel="icon" href="favicon.svg?v=2026-10-22-flip" type="image/svg+xml">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=2026-10-22-flip">
+<link rel="icon" href="favicon.ico?v=2026-10-22-book" sizes="48x48">
+<link rel="icon" href="favicon.svg?v=2026-10-22-book" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=2026-10-22-book">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="css/style.css?v=2026-10-22-flip">
-<link rel="stylesheet" href="css/app.css?v=2026-10-22-flip">
-<script src="js/config.js?v=2026-10-22-flip"></script>
-<script src="js/app-banner.js?v=2026-10-22-flip"></script>
+<link rel="stylesheet" href="css/style.css?v=2026-10-22-book">
+<link rel="stylesheet" href="css/app.css?v=2026-10-22-book">
+<script src="js/config.js?v=2026-10-22-book"></script>
+<script src="js/app-banner.js?v=2026-10-22-book"></script>
 <!-- Search engines: who we are and where we clean. No address or phone (site rules). The cities are the 64 chips in #area; keep them the same. -->
 <script type="application/ld+json">
 {
@@ -39,7 +39,7 @@
    "name": "Bay Area Shine Cleaners",
    "alternateName": "Bay Area Shine",
    "slogan": "Pick a time. We bring the shine.",
-   "description": "Home cleaning, Airbnb turnovers, organizing and offices across the Bay Area. Build your price online and book a 3-hour window.",
+   "description": "Home cleaning, Airbnb turnovers, organizing and offices across the Bay Area. Build your price online, then book in the app.",
    "url": "https://www.bayareashinecleaners.com/",
    "email": "hello@bayareashinecleaners.com",
    "logo": "https://www.bayareashinecleaners.com/img/brand/bas-icon-512.png",
@@ -220,7 +220,15 @@
      "name": "How do I book?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Tap See open times and pick a 3-hour window: 8–11 AM, 11 AM–2 PM or 2–5 PM, any day. We text to confirm."
+      "text": "Build your clean on this page, then tap Book. In the app, pick your day and time, sign in with your email, and hold it with the $40 deposit."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Do I need the app?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No download needed. Book in the web app on any device. An iPhone app on the App Store will follow."
      }
     },
     {
@@ -228,7 +236,7 @@
      "name": "What is the $40 deposit for?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "It holds your spot and comes off your cleaning total. It's non-refundable. Unpaid bookings are released after 24 hours."
+      "text": "It holds your spot and comes off your cleaning total. It's non-refundable. Your time is held for 15 minutes while you pay."
      }
     },
     {
@@ -323,7 +331,7 @@
     <a class="logo" href="#top"><img src="img/brand/bas-line-2c-light.svg" width="201" height="30" alt="Bay Area Shine"></a>
     <nav class="nav" aria-label="Main">
       <a href="#build">Prices</a><a href="#how">How it works</a><a href="#faq">FAQ</a><a href="#area">Service area</a><a href="blog/">Blog</a>
-      <a class="btn btn-ink" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2Wwjx2FFDg3RgHEk2cQYq_syutLqoAJwA_ZfKUwuwO08z3pgCuJb4vVCWDGLgxNbFf8F5uq_d3" target="_blank" rel="noopener" data-book><span>Book<span class="lg-only"> a cleaning</span></span></a>
+      <a class="btn btn-ink" href="https://app.bayareashinecleaners.com/" data-book><span>Book<span class="lg-only"> a cleaning</span></span></a>
     </nav>
   </header>
 </div>
@@ -334,7 +342,8 @@
     <div class="hero-grid">
       <div class="hero-left">
         <h1>Pick a time.<br>We bring the <span class="hl">shine.</span></h1>
-        <p>Home cleaning, Airbnb turnovers, organizing and offices across the Bay Area. Book online and we text to confirm.</p>
+        <p>Home cleaning, Airbnb turnovers, organizing and offices across the Bay Area. Build your price, then book in the app.</p>
+        <div class="hero-acts"><a class="btn btn-ink" href="https://app.bayareashinecleaners.com/" data-book>Book a cleaning <span aria-hidden="true">→</span></a><a class="btn btn-ghost" href="#build">Build your price first <span aria-hidden="true">↓</span></a></div>
       </div>
       <figure class="note">
         <img src="img/thanks-card.jpg" width="635" height="635" decoding="async" alt="A Bay Area Shine thank-you card on a clean kitchen counter next to fresh daisies">
@@ -344,20 +353,7 @@
         </figcaption>
       </figure>
     </div>
-    <div class="book">
-      <h2 class="book-h">Choose a 3-hour window</h2>
-      <div class="windows" id="windows" role="group" aria-label="Time window">
-        <button class="win" type="button" disabled aria-pressed="false" data-win="morning"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18h16M7 14a5 5 0 0 1 10 0M12 4v4M9 6l3-3 3 3"/></svg></span><span><small>MORNING</small><b>8–11 AM</b></span></button>
-        <button class="win" type="button" disabled aria-pressed="true" data-win="midday"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/></svg></span><span><small>MIDDAY</small><b>11 AM–2 PM</b></span></button>
-        <button class="win" type="button" disabled aria-pressed="false" data-win="afternoon"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18h16M7 14a5 5 0 0 1 10 0M12 3v5M9 6l3 3 3-3"/></svg></span><span><small>AFTERNOON</small><b>2–5 PM</b></span></button>
-      </div>
-      <div class="book-foot">
-        <div class="dep"><span class="coin" aria-hidden="true">$</span><span><b><span data-cfg="deposit">$40</span> holds your spot</b> · comes off your total</span></div>
-        <a class="btn btn-ink" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2Wwjx2FFDg3RgHEk2cQYq_syutLqoAJwA_ZfKUwuwO08z3pgCuJb4vVCWDGLgxNbFf8F5uq_d3" target="_blank" rel="noopener" data-book>See open times <span aria-hidden="true">→</span></a>
-      </div>
-      <p class="book-hint" data-hint="hero" hidden></p>
-    </div>
-    <div class="trust"><span><span class="stars" aria-hidden="true">★★★★★</span> Family-owned since 2019 · 5-star reviews</span><a href="#build">Build your price first →</a></div>
+    <div class="trust"><span><span class="stars" aria-hidden="true">★★★★★</span> Family-owned since 2019 · 5-star reviews</span></div>
   </section>
 
   <section class="wipe-sect" aria-label="Sweep to shine">
@@ -371,7 +367,7 @@
         <img class="haze" aria-hidden="true" src="img/sweep-haze.jpg" width="1024" height="576" loading="lazy" decoding="async" alt="">
       </picture>
       <div class="blade" aria-hidden="true"></div>
-      <div class="reveal" id="reveal"><h2>This is what Saturday looks like.</h2><a class="btn btn-ink" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2Wwjx2FFDg3RgHEk2cQYq_syutLqoAJwA_ZfKUwuwO08z3pgCuJb4vVCWDGLgxNbFf8F5uq_d3" target="_blank" rel="noopener" data-book>Book this clean <span aria-hidden="true">→</span></a></div>
+      <div class="reveal" id="reveal"><h2>This is what Saturday looks like.</h2><a class="btn btn-ink" href="https://app.bayareashinecleaners.com/" data-book>Book this clean <span aria-hidden="true">→</span></a></div>
       <button class="reset" type="button" id="again"><span aria-hidden="true">↻</span> Replay</button>
     </div>
   </section>
@@ -379,9 +375,9 @@
 
 <section class="sect white" id="build">
   <div class="wrap">
-    <div class="sect-head"><div><span class="eyebrow">Build your clean</span><h2>Pick a clean. Tap the extras. See your price.</h2></div><p>One price, built by you. We text your exact price, broken down room by room.</p></div>
+    <div class="sect-head"><div><span class="eyebrow">Build your clean</span><h2>Pick a clean. Tap the extras. See your price.</h2></div><p>One price, built by you. The app shows your exact price before you pay.</p></div>
 
-    <p class="enhancement-note">Starting prices are below. For a quote with your home size and extras, <a class="mail" href="mailto:hello@bayareashinecleaners.com?subject=Cleaning%20quote">email us</a>, or book an open time online.</p>
+    <p class="enhancement-note">Starting prices are below. For a quote with your home size and extras, <a class="mail" href="mailto:hello@bayareashinecleaners.com?subject=Cleaning%20quote">email us</a>, or book in the app.</p>
     <h3 class="stepnum"><span>1</span>Pick your clean</h3>
     <div class="pick" id="svcSeg" role="group" aria-label="Type of clean">
       <button type="button" disabled data-svc="standard" aria-pressed="true"><b>Standard clean</b><span>Kitchen, bathrooms, bedrooms and floors, done right every visit.</span><span class="pr"><small>from </small><span data-cfg="from.standard">$150</span></span><span class="inc-line" data-inc="standard">Add any extra you need</span></button>
@@ -405,9 +401,8 @@
         <div><div class="lbl" id="freqLbl">4 · How often</div><div class="seg four" id="freqSeg" role="group" aria-labelledby="freqLbl"></div></div>
         <div><div class="lbl">Your estimate</div><div class="lines" id="lines"></div></div>
         <div class="total" aria-live="polite"><span>Starting at</span><span class="tot" id="tot"><b id="total" tabindex="-1">$150</b><b class="roll" aria-hidden="true"></b></span></div>
-        <a class="btn btn-sun" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2Wwjx2FFDg3RgHEk2cQYq_syutLqoAJwA_ZfKUwuwO08z3pgCuJb4vVCWDGLgxNbFf8F5uq_d3" target="_blank" rel="noopener" data-book>Book this clean <span aria-hidden="true">→</span></a>
-        <div class="est-copy" id="estCopy" hidden><p>In the booking notes, add: <b id="bookNote" tabindex="-1"></b></p><button type="button" id="copyNote">Copy</button><p class="copy-status" id="copyStatus" role="status"></p></div>
-        <p class="est-note"><span data-cfg="deposit">$40</span> deposit holds your spot and comes off this total.<span data-hint="est" hidden></span></p>
+        <a class="btn btn-sun" id="bookBtn" href="https://app.bayareashinecleaners.com/book?src=site">Book this clean <span aria-hidden="true">→</span></a>
+        <p class="est-note">Next: pick your day and time, sign in with your email, and hold it with the <span data-cfg="deposit">$40</span> deposit.</p>
       </aside>
     </div>
 
@@ -438,9 +433,9 @@
   <div class="wrap">
     <div class="sect-head"><div><span class="eyebrow">How booking works</span><h2>Three steps, then we clean.</h2></div></div>
     <ol class="howrow">
-      <li class="step"><span aria-hidden="true">1</span><p><b>Pick a 3-hour window</b><span data-cfg="windows">8–11 AM, 11 AM–2 PM or 2–5 PM</span>, any day.</p></li>
-      <li class="step"><span aria-hidden="true">2</span><p><b>Hold it with a <span data-cfg="deposit">$40</span> deposit</b>It comes off your total. Reschedule free with <span data-cfg="policy.rescheduleHours">48</span> hours' notice.</p></li>
-      <li class="step"><span aria-hidden="true">3</span><p><b>Get your price by text</b>We confirm and send your price, broken down room by room.</p></li>
+      <li class="step"><span aria-hidden="true">1</span><p><b>Build your clean here</b>Pick your clean, home size, bathrooms and extras to see your price.</p></li>
+      <li class="step"><span aria-hidden="true">2</span><p><b>Pick your day and time in the app</b>Sign in with your email, then choose a start time that works.</p></li>
+      <li class="step"><span aria-hidden="true">3</span><p><b>Hold it with the <span data-cfg="deposit">$40</span> deposit</b>It comes off your total. Reschedule free with <span data-cfg="policy.rescheduleHours">48</span> hours' notice.</p></li>
     </ol>
   </div>
 </section>
@@ -459,7 +454,8 @@
   <div class="wrap">
     <div class="sect-head"><div><span class="eyebrow">FAQ</span><h2>Quick answers.</h2></div></div>
     <div class="faq">
-      <details open><summary><span class="t">How do I book?</span></summary><p>Tap See open times and pick a 3-hour window: <span data-cfg="windows">8–11 AM, 11 AM–2 PM or 2–5 PM</span>, any day. We text to confirm.</p></details>
+      <details open><summary><span class="t">How do I book?</span></summary><p>Build your clean on this page, then tap Book. In the app, pick your day and time, sign in with your email, and hold it with the <span data-cfg="deposit">$40</span> deposit.</p></details>
+      <details><summary><span class="t">Do I need the app?</span></summary><p>No download needed. Book in the web app on any device. An iPhone app on the App Store will follow.</p></details>
       <details><summary><span class="t">What is the <span data-cfg="deposit">$40</span> deposit for?</span></summary><p>It holds your spot and comes off your cleaning total.<span data-policy="depositNonRefundable"> It's non-refundable.</span> Unpaid bookings are released after <span data-cfg="policy.unpaidReleaseHours">24</span> hours.</p></details>
       <details><summary><span class="t">Can I reschedule?</span></summary><p>Yes. Rescheduling is free with <span data-cfg="policy.rescheduleHours">48</span> hours' notice.</p></details>
       <details><summary><span class="t">What if you miss a spot?</span></summary><p>Tell us within <span data-cfg="policy.recleanHours">24</span> hours and we come back to fix it, free.</p></details>
@@ -497,8 +493,8 @@
 <div class="wrap close-wrap">
   <div class="close">
     <svg class="big" aria-hidden="true"><use href="#sp"/></svg>
-    <div class="close-copy"><h2>Ready for a home that shines?</h2><p>Grab a window online, or email us for a free quote.</p></div>
-    <div class="acts"><a class="btn btn-ink" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2Wwjx2FFDg3RgHEk2cQYq_syutLqoAJwA_ZfKUwuwO08z3pgCuJb4vVCWDGLgxNbFf8F5uq_d3" target="_blank" rel="noopener" data-book>See open times <span aria-hidden="true">→</span></a><a class="btn btn-ghost" href="mailto:hello@bayareashinecleaners.com?subject=Question" data-ask>Ask a question</a><a class="btn btn-ghost mail-btn" href="mailto:hello@bayareashinecleaners.com" data-mail>hello@bayareashinecleaners.com</a></div>
+    <div class="close-copy"><h2>Ready for a home that shines?</h2><p>Build your price, then book in the app. Or email us for a free quote.</p></div>
+    <div class="acts"><a class="btn btn-ink" href="https://app.bayareashinecleaners.com/" data-book>Book a cleaning <span aria-hidden="true">→</span></a><a class="btn btn-ghost" href="mailto:hello@bayareashinecleaners.com?subject=Question" data-ask>Ask a question</a><a class="btn btn-ghost mail-btn" href="mailto:hello@bayareashinecleaners.com" data-mail>hello@bayareashinecleaners.com</a></div>
   </div>
 </div>
 </main>
@@ -549,8 +545,8 @@
 </dialog>
 
 <!-- bump ?v= on every release so a cached old file never pairs with a new page -->
-<script src="js/main.js?v=2026-10-22-flip"></script>
-<script src="js/app-promotion.js?v=2026-10-22-flip"></script>
+<script src="js/main.js?v=2026-10-22-book"></script>
+<script src="js/app-promotion.js?v=2026-10-22-book"></script>
 <!-- Optional fonts must not delay parsing or browser form restoration. -->
 <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&family=Caveat:wght@600&display=swap">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&family=Caveat:wght@600&display=swap"></noscript>

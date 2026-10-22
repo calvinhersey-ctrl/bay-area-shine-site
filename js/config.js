@@ -8,31 +8,27 @@ window.BAS_CONFIG = {
   // One switch controls the hero, app links, /app and Safari banner together.
   appPromotion: {
     enabled: true,
-    // false until the app is public in the App Store: the launch design shows, but every badge, QR code,
-    // Safari banner and store link becomes "Get early access" → /beta/. true = badge, QR and banner point at storeUrl.
+    // false until the iPhone app is public in the App Store: no badge, QR code, Safari banner or store link.
+    // true = badge, QR and banner point at storeUrl, and iPhones go there to book.
     storeLive: false,
     storeUrl: "https://apps.apple.com/app/id6822942016",
     // Actual Cleaning now UI with the owner-approved real cleaner profile.
     // Fictional job/home only; no customer details or sample portraits.
     screenshot: {
-      src: "img/app-cleaning-profile.webp?v=2026-10-22-flip",
+      src: "img/app-cleaning-profile.webp?v=2026-10-22-book",
       width: 1206,
       height: 2622,
       alt: "Bay Area Shine app showing Cleaning now with your cleaner’s photo, rating and message and call buttons"
     }
   },
 
-  // Launch-day switch for the Book buttons. false = every Book button opens the Calendar page below, worded "Request a time".
-  // true = Book buttons open the web app (Android and computers), or the App Store on iPhone once appPromotion.storeLive is true.
-  // Flip to true only at the live-payments cutover, on the owner's OK (notes/booking-launch.md, "Web app launch").
+  // The web app is where booking happens: pick the day and time, sign in and pay the deposit. Every Book button opens it,
+  // and the home page's builder passes the quote along (…/book?src=site&svc=…&size=…&baths=…&extras=…&freq=…).
   webApp: {
     live: true,
     url: "https://app.bayareashinecleaners.com/"
   },
-
-  // Google Calendar booking page. Empty = Book buttons open the request form.
-  // Google's booking page can't open on a chosen window; the visitor taps the matching start time there.
-  bookingUrl: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2Wwjx2FFDg3RgHEk2cQYq_syutLqoAJwA_ZfKUwuwO08z3pgCuJb4vVCWDGLgxNbFf8F5uq_d3",
+  bookingUrl: "https://app.bayareashinecleaners.com/",
 
   depositAmount: 40,
   depositUrl: "https://buy.stripe.com/6oUcN77PZ596cV55XDdjO0d",
@@ -105,30 +101,10 @@ window.BAS_CONFIG = {
   ]
 };
 
-/* Where the Book buttons go (see webApp above). main.js and pages.js set every [data-book] link from bookingUrl, so
-   when the web app is live this file swaps bookingUrl for the app address and sets bookingIsCalendar false (main.js then
-   hides the Calendar-only "tap the ... start" hints). Before launch the Calendar page stays and the buttons say "Request a time". */
+/* iPhone visitors go to the App Store instead once the listing is public (appPromotion.storeLive); until then every Book button opens the web app. */
 (function (C) {
-  var W = C.webApp, A = C.appPromotion, live = !!(W && W.live === true && W.url);
-  C.bookingIsCalendar = !live;
-  if (live) {
-    var iphone = /iPhone|iPod/.test(navigator.userAgent || '');
-    C.bookingUrl = (iphone && A && A.enabled === true && A.storeLive === true && A.storeUrl) ? A.storeUrl : W.url;
-  }
-  function relabel() {
-    document.querySelectorAll('[data-book]').forEach(function (a) {
-      var arrow = a.querySelector('[aria-hidden="true"]'), lg = a.querySelector('.lg-only');
-      if (live && /on the web/i.test(a.textContent)) a.href = W.url; // the app-first layout's web option stays the web app, even on iPhone
-      if (lg && !live) {
-        var s = document.createElement('span'), l = document.createElement('span');
-        l.className = 'lg-only'; l.textContent = ' a time'; s.append('Request', l); a.replaceChildren(s);
-      } else if (!lg && !live) {
-        a.replaceChildren('Request a time' + (arrow ? ' ' : ''), arrow || '');
-      } else if (!lg && /^\s*See open times/.test(a.textContent)) {
-        a.replaceChildren('Book a cleaning' + (arrow ? ' ' : ''), arrow || '');
-      }
-    });
-  }
-  if (typeof document === 'undefined') return; // the app repo's price test loads this file outside a browser
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', relabel); else relabel();
+  var A = C.appPromotion, W = C.webApp;
+  C.bookingIsCalendar = false;
+  var iphone = typeof navigator !== 'undefined' && /iPhone|iPod/.test(navigator.userAgent || '');
+  C.bookingUrl = (iphone && A && A.enabled === true && A.storeLive === true && A.storeUrl) ? A.storeUrl : W.url;
 })(window.BAS_CONFIG);

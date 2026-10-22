@@ -1,7 +1,7 @@
 /* Bay Area Shine: page behaviour.
    Every price, link, window, policy and review comes from window.BAS_CONFIG (site/js/config.js, owned by
-   Booking & Launch). FALLBACK_CONFIG below only fills keys config.js leaves out; links it doesn't
-   know (bookingUrl) are left out, and the page falls back to the request form. */
+   Booking & Launch). FALLBACK_CONFIG below only fills keys config.js leaves out (it knows the web app's address).
+   The builder is the quote step: its Book button opens the app with the quote in the link. */
 (function(){
   'use strict';
   /* Arriving on a link like /#reviews (the QR card): make sure we end up there even if photos moved the page
@@ -20,6 +20,8 @@
     email: 'hello@bayareashinecleaners.com',
     depositAmount: 40,
     quoteEndpoint: 'https://formsubmit.co/ajax/bayareashinecleaners@gmail.com',
+    webApp: {live:true, url:'https://app.bayareashinecleaners.com/'},
+    bookingUrl: 'https://app.bayareashinecleaners.com/',
     windows: [
       {id:'morning', part:'Morning', label:'8–11 AM'},
       {id:'midday', part:'Midday', label:'11 AM–2 PM'},
@@ -137,42 +139,11 @@
     try {
       sessionStorage.setItem(DRAFT_KEY, JSON.stringify({
         svc:st.svc, size:st.size, baths:st.baths, bathsPicked:st.bathsPicked === true, freq:st.freq, room:st.room,
-        win:st.win, winPicked:st.winPicked === true, picked:Array.from(st.picked)
+        picked:Array.from(st.picked)
       }));
     } catch { /* Storage can be unavailable in private/locked-down browsers. The picker still works. */ }
   }
   const winLabel = id => (C.windows.find(w => w.id === id) || {}).label || '';
-  /* Google's booking page can't open on a chosen window, so we say which start time to tap there */
-  const START = {morning:'8:00am', midday:'11:00am', afternoon:'2:00pm'};
-  const winStart = w => w.start || START[w.id] || '';
-
-  /* ---------- time windows (hero booking card) ---------- */
-  const WIN_ICONS = [
-    '<path d="M4 18h16M7 14a5 5 0 0 1 10 0M12 4v4M9 6l3-3 3 3"/>',
-    '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/>',
-    '<path d="M4 18h16M7 14a5 5 0 0 1 10 0M12 3v5M9 6l3 3 3-3"/>'
-  ];
-  const winBox = $('#windows');
-  winBox.replaceChildren(...C.windows.map((w, i) => {
-    const b = document.createElement('button');
-    b.type = 'button'; b.className = 'win'; b.dataset.win = w.id;
-    b.innerHTML = '<span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' + WIN_ICONS[i % 3] + '</svg></span><span><small></small><b></b></span>';
-    $('small', b).textContent = (w.part || '').toUpperCase();
-    $('b', b).textContent = w.label;
-    b.addEventListener('click', () => { st.win = w.id; st.winPicked = true; windowEdits++; renderWins(); saveEstimate(); });
-    return b;
-  }));
-  function renderWins(){
-    $$('.win', winBox).forEach(b => b.setAttribute('aria-pressed', b.dataset.win === st.win));
-    const w = C.windows.find(x => x.id === st.win) || {}, starts = C.windows.map(winStart).filter(Boolean);
-    $$('[data-hint]').forEach(el => {
-      el.hidden = !C.bookingUrl || C.bookingIsCalendar === false || !starts.length;
-      el.textContent = (el.dataset.hint === 'est' ? ' ' : '') + (el.dataset.hint === 'hero' || st.winPicked
-        ? 'On the next page, tap the ' + winStart(w) + ' start.'
-        : 'On the next page, tap the ' + listJoin(starts, 'or') + ' start.');
-    });
-  }
-
   /* ---------- sparkles ---------- */
   function sparkAt(parent, x, y){
     if (reduce) return;
@@ -233,11 +204,9 @@
       if (draft.bathsPicked === true && Number.isInteger(draft.baths) && draft.baths >= 1 && draft.baths <= maxBaths) { st.baths = draft.baths; st.bathsPicked = true; }
       if (!oneTime(st.svc) && C.frequencies.some(f => f.id === draft.freq)) st.freq = draft.freq;
       if (ROOMS.some(r => r.id === draft.room)) st.room = draft.room;
-      if (C.windows.some(w => w.id === draft.win)) { st.win = draft.win; st.winPicked = draft.winPicked === true; }
       if (Array.isArray(draft.picked)) st.picked = new Set(draft.picked.filter(k => typeof k === 'string' && Object.prototype.hasOwnProperty.call(C.extras, k)));
     }
   } catch { /* Old/corrupt data must never stop booking. */ }
-  renderWins();
 
   function estimate(id, size, freqId, picked, baths){
     const base = basePrice(id, size), inc = incl(id);
@@ -402,11 +371,7 @@
     lastLines = new Set(lines.map(key));
     $('#lines').replaceChildren(...lines);
     showTotal(est.total);
-    $('#estCopy').hidden = !C.bookingUrl || C.bookingIsCalendar === false;
-    $('#bookNote').textContent = bookNote(est);
-    clearTimeout(copyTimer);
-    $('#copyStatus').textContent = copying ? 'Copying booking notes…' : '';
-    $('#copyNote').textContent = copying ? 'Copying…' : 'Copy';
+    $('#bookBtn').href = bookHref(est);
     showPhotoState();
     saveEstimate();
   }
@@ -443,54 +408,17 @@
     rollRaf = requestAnimationFrame(step);
     rollEnd = setTimeout(() => { shown = n; tot.classList.remove('rolling'); }, D + 300);
   }
-  /* Google's booking page can't take our build, so we hand the customer a line to paste into its notes */
-  function bookNote(est){
-    const parts = [SVC_LINE[st.svc], (sizeLabels[st.size] || '').toLowerCase()]
-      .concat(hasBaths ? [st.baths + (st.baths === maxBaths ? '+' : '') + (st.baths === 1 ? ' bath' : ' baths')] : [])
-      .concat(est.extras.map(k => C.extras[k].label.toLowerCase().replace(/, (.+)$/, ' ($1)')))
-      .concat(est.f.label.toLowerCase());
-    return parts.filter(Boolean).join(', ') + ', estimate ' + money(est.total) + '.';
+  /* The builder is the quote step: Book hands the build to the app, which asks for the day and time, sign-in and the deposit. */
+  const BOOK_SIZES = ['studio1', '2', '3', '4', '5', '6plus'];
+  function bookHref(est){
+    const base = new URL('book', C.webApp.url);
+    const q = base.searchParams;
+    q.set('src', 'site'); q.set('svc', st.svc); q.set('size', BOOK_SIZES[st.size] || String(st.size + 1));
+    q.set('baths', String(hasBaths ? st.baths : 1));
+    q.set('extras', Object.keys(C.extras).filter(k => est.extras.includes(k)).join(','));
+    q.set('freq', oneTime(st.svc) ? 'once' : st.freq);
+    return base.href.replace(/%2C/g, ',');
   }
-  let copying = false, copyTimer = 0;
-  function selectNote(){
-    $('#bookNote').focus({preventScroll:true});
-    const r = document.createRange(); r.selectNodeContents($('#bookNote'));
-    const s = getSelection(); if (s){ s.removeAllRanges(); s.addRange(r); }
-    $('#copyStatus').textContent = s ? "Text selected. Use your device's Copy command."
-      : "Select the booking notes above, then use your device's Copy command.";
-  }
-  $('#copyNote').addEventListener('click', () => {
-    if (copying) return;
-    const b = $('#copyNote'), text = $('#bookNote').textContent;
-    clearTimeout(copyTimer);
-    copying = true; b.disabled = true; b.textContent = 'Copying…'; b.setAttribute('aria-busy', 'true');
-    $('#copyStatus').textContent = 'Copying booking notes…';
-    const release = () => { copying = false; b.disabled = false; b.textContent = 'Copy'; b.removeAttribute('aria-busy'); };
-    const failed = () => {
-      // Permission may fail after the customer has moved to another field or opened the form.
-      const active = document.activeElement;
-      const chosen = getSelection(), book = $('#bookNote');
-      const selectedElsewhere = chosen && !chosen.isCollapsed && !(book.contains(chosen.anchorNode) && book.contains(chosen.focusNode));
-      const select = !selectedElsewhere && !$('#quote').open && (active === b || active === document.body);
-      release();
-      if (select) selectNote();
-      else $('#copyStatus').textContent = "Copy didn't work. Select the booking notes above, then use your device's Copy command.";
-    };
-    const done = () => {
-      release();
-      if ($('#bookNote').textContent !== text){
-        $('#copyStatus').textContent = 'Earlier notes copied. Copy again for your updated estimate.';
-        return;
-      }
-      b.textContent = 'Copied'; $('#copyStatus').textContent = 'Booking notes copied.';
-      copyTimer = setTimeout(() => { b.textContent = 'Copy'; }, 2000);
-    };
-    // Call inside the click's user activation; some browsers throw instead of rejecting.
-    try {
-      if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') Promise.resolve(navigator.clipboard.writeText(text)).then(done, failed);
-      else failed();
-    } catch { failed(); }
-  });
   /* keep every label inside the photo: use the preferred side, switch sides if it would be cut off */
   function fitLabels(){
     const listScroll = room.classList.contains('photo-list') ? room.scrollTop : 0;
@@ -581,16 +509,10 @@
     e.preventDefault(); openForm('quote', {service: st.svc, builder: true, city: q.value.trim(), opener: ask});
   });
 
-  /* ---------- booking: the Google booking page when config has it, otherwise the request form ---------- */
+  /* ---------- booking: every Book button opens the app (the builder's own button is set in renderPicks) ---------- */
   $$('[data-book]').forEach(a => {
-    if (C.bookingUrl){ a.href = C.bookingUrl; a.target = '_blank'; a.rel = 'noopener'; }
-    else {
-      a.href = 'mailto:' + C.email + '?subject=Cleaning%20request'; a.removeAttribute('target');
-      a.addEventListener('click', e => {
-        if (typeof dlg.showModal !== 'function') return;
-        e.preventDefault(); openForm('book', {service: st.svc, builder: true, opener: a});
-      });
-    }
+    if (C.bookingUrl) a.href = C.bookingUrl;
+    else a.href = 'mailto:' + C.email + '?subject=Cleaning%20request';
   });
   $$('[data-quote]').forEach(b => b.addEventListener('click', e => {
     if (typeof dlg.showModal !== 'function') return;

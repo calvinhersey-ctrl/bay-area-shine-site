@@ -394,37 +394,9 @@ html:has(dialog[open]){overflow:hidden}
 .post-card .read{color:var(--teal);font-weight:700}
 .more-svc{padding-top:0}
 
-/* /beta/: the temporary app-beta sign-up, and its one link under the home hero */
-.beta-line{margin-top:4px}
-.beta-line a{display:inline-flex;align-items:center;min-height:44px;font-weight:700}
-.beta{max-width:620px;padding-block:8px 48px}
-.beta h1{font-size:clamp(36px,6vw,56px);line-height:1.02;font-weight:800;letter-spacing:-0.03em;margin:6px 0 14px}
-.beta > p{margin-bottom:10px}
-.beta-lead{font-size:19px;line-height:1.55;color:var(--ink)}
-.beta-card{margin-top:22px;background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:clamp(18px,4vw,28px)}
-.beta-card form{display:grid;gap:16px}
-.choice{border:0;margin:0;padding:0;min-width:0}
-.choice legend{font-size:14px;font-weight:800;color:var(--ink);padding:0;margin-bottom:6px}
-.choice-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.choice-row label{position:relative;display:block}
-.choice-row input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
-.choice-row span{display:flex;align-items:center;justify-content:center;min-height:48px;border:2px solid var(--line);border-radius:12px;background:var(--fog);color:var(--ink);font-weight:700}
-.choice-row input:checked + span{background:#FFF6DC;border-color:var(--ink)}
-.choice-row input:focus-visible + span{outline:3px solid var(--ink);outline-offset:3px}
-.choice[aria-invalid="true"] span,.choice-row input[aria-invalid="true"] + span{border-color:#8A3A00}
-.choice-note{margin-top:8px;font-size:15px}
-.opt{font-weight:600;color:var(--muted)}
-.beta-acts{display:flex;flex-wrap:wrap;gap:10px}
-@media (max-width:520px){.beta-acts .btn{width:100%}}
-.beta-acts .btn:disabled{opacity:.7;cursor:default;transform:none}
-.beta-done{background:#E3F4F1;border:2px solid var(--teal);border-radius:14px;padding:14px 16px;color:var(--ink)}
-.beta-done b{font-family:var(--display);font-size:20px}
-.beta-done p{margin-top:4px}
-.beta-small{font-size:14px}
-.beta-web{margin-top:36px}
-.beta-web h2{font-size:clamp(23px,4vw,30px);margin-bottom:8px}
-.beta-web .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
-@media (max-width:520px){.beta-web .acts .btn{width:100%}}
+/* home hero: Book (the app) and Build your price first */
+.hero-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+@media (max-width:520px){.hero-acts .btn{width:100%}}
 
 /* motion: quiet feedback on what the visitor does (a tap, a pick, the price changing), nothing that plays by itself.
    All of it is inside no-preference, so reduced motion gets none of it (the sweep has its own rules above). */

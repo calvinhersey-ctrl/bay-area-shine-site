@@ -1,6 +1,6 @@
 # Bay Area Shine Cleaners
 
-> Bay Area Shine is a home cleaning service across the Bay Area. Build your price online, pick a 3-hour window and book, and see your price up front.
+> Bay Area Shine is a home cleaning service across the Bay Area. Build your price online, then book in the app and see your price up front.
 
 Prices as of Oct 2026. Extras and repeat discounts apply on top.
 
@@ -30,7 +30,7 @@ Prices as of Oct 2026. Extras and repeat discounts apply on top.
 - Refer a friend: $25 off your next clean for every new client you send.
 
 ## How to book
-Go to https://www.bayareashinecleaners.com/, build your price, and pick a 3-hour window (8–11 AM, 11 AM–2 PM, 2–5 PM), any day. We text to confirm. Rescheduling is free with 48 hours' notice. If we miss a spot, tell us within 24 hours and we come back to fix it, free. We bring all the cleaning supplies and equipment.
+Go to https://www.bayareashinecleaners.com/ and build your clean: pick the clean, home size, bathrooms and extras to see your price. Then tap Book. The app (https://app.bayareashinecleaners.com/, no download needed, any device) opens with your quote already built: pick your day and time, sign in with your email, and hold it with the $40 deposit, which comes off your total. Rescheduling is free with 48 hours' notice. If we miss a spot, tell us within 24 hours and we come back to fix it, free. We bring all the cleaning supplies and equipment. An iPhone app on the App Store will follow.
 Questions and quotes: hello@bayareashinecleaners.com
 
 ## Service area

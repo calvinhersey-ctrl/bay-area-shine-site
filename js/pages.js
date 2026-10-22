@@ -38,7 +38,7 @@
     if (f) el.textContent = pct(f.off);
   });
   if (C.bookingUrl) document.querySelectorAll('[data-book]').forEach(a => { a.href = C.bookingUrl; });
-  /* blog app box: early access until the app is public, then the stable /app link (same switch as the home page) */
+  /* blog app box: once the iPhone listing is public, the box points to the stable /app link (same switch as the home page) */
   if (C.appPromotion && C.appPromotion.enabled === true && C.appPromotion.storeLive === true) {
     document.querySelectorAll('[data-app-cta]').forEach(a => { a.href = '/app/'; a.textContent = 'Get the app'; });
     document.querySelectorAll('[data-app-note]').forEach(el => { el.textContent = 'Available on the App Store. Prefer the web? You can still book online.'; });
